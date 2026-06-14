@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#e6e3e2",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "tertiary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed": "#e4e2dc",
+                        "on-error": "#690005",
+                        "tertiary": "#c8c6c5",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-container": "#666565",
+                        "surface-container": "#201f1f",
+                        "surface-dim": "#131313",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#313030",
+                        "on-primary": "#690000",
+                        "secondary-container": "#474742",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed": "#1b1c18",
+                        "on-primary-fixed-variant": "#930000",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#5e3f3a",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "primary-container": "#cd0000",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "inverse-primary": "#c00000",
+                        "on-tertiary": "#313030",
+                        "inverse-surface": "#e5e2e1",
+                        "outline": "#ae8881",
+                        "on-primary-fixed": "#410000",
+                        "surface-tint": "#ffb4a8",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "primary-fixed": "#ffdad4",
+                        "on-primary-container": "#ffdbd5",
+                        "surface-bright": "#3a3939",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#353534",
+                        "on-secondary": "#30312c",
+                        "secondary": "#c8c6c0",
+                        "primary": "#ffb4a8",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "surface": "#131313",
+                        "secondary-fixed-dim": "#c8c6c0",
+                        "background": "#131313",
+                        "on-surface-variant": "#e8bdb6",
+                        "on-secondary-fixed-variant": "#474742",
+                        "on-secondary-container": "#b6b5af"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "stack-lg": "48px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Space Grotesk"],
+                        "label-bold": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0F0F0F;
+            color: #EFEDE6;
+        }
+        .sidebar-item-active {
+            border-right: 3px solid #CD0000;
+            background: linear-gradient(90deg, rgba(205, 0, 0, 0.1) 0%, rgba(205, 0, 0, 0) 100%);
+        }
+    </style>
+</head>
+<body class="font-body-md bg-surface text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SIDEBAR -->
+<aside class="w-64 bg-surface-container border-r border-outline-variant flex flex-col hidden md:flex">
+<div class="p-8">
+<div class="text-2xl font-black text-neutral-50 italic tracking-widest font-headline-md uppercase">
+                    SMSM STORE
+                </div>
+<div class="mt-2 text-[10px] text-primary-container font-label-bold tracking-widest uppercase">
+                    Admin Protocol v2.4
+                </div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-4 px-4 py-3 sidebar-item-active text-on-primary-container group transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-primary-container" data-icon="dashboard">dashboard</span>
+<span class="font-label-bold text-xs uppercase tracking-wider">Dashboard / لوحة القيادة</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-container" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-bold text-xs uppercase tracking-wider">Products / المنتجات</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-container" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-bold text-xs uppercase tracking-wider">Orders / الطلبات</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-container" data-icon="category">category</span>
+<span class="font-label-bold text-xs uppercase tracking-wider">Categories / الفئات</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary-container" data-icon="settings">settings</span>
+<span class="font-label-bold text-xs uppercase tracking-wider">Site Settings / الإعدادات</span>
+</a>
+</nav>
+<div class="p-6 border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-highest flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-primary-container" data-icon="account_circle">account_circle</span>
+</div>
+<div>
+<p class="text-[10px] font-label-bold uppercase">System Admin</p>
+<p class="text-[9px] text-tertiary uppercase opacity-60">Session: Active</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT AREA -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-surface-dim">
+<!-- TOP APP BAR -->
+<header class="bg-neutral-950 border-b border-neutral-900 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1440px] mx-auto">
+<div class="flex flex-col">
+<h1 class="font-headline-md text-on-surface uppercase tracking-tight">Welcome back Admin</h1>
+<p class="text-[10px] font-label-bold text-tertiary uppercase tracking-[0.2em]">System Status: Nominal | Today's Summary / ملخص اليوم</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-tertiary text-lg" data-icon="search">search</span>
+<input class="bg-surface-container border border-outline-variant px-10 py-2 text-[10px] font-label-bold tracking-widest focus:ring-1 focus:ring-primary-container focus:border-primary-container w-64 outline-none" placeholder="GLOBAL SEARCH..." type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-bold text-[10px] uppercase tracking-widest active:scale-95 duration-200 hover:brightness-110">
+                            Order WhatsApp
+                        </button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container transition-colors" data-icon="language">language</button>
+</div>
+</div>
+</header>
+<!-- CONTENT CANVAS -->
+<div class="p-gutter max-w-[1440px] mx-auto w-full space-y-gutter">
+<!-- KPI BENTO GRID -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-gutter">
+<div class="bg-surface-container border border-outline-variant p-6 flex flex-col justify-between group hover:border-on-surface transition-colors">
+<div class="flex justify-between items-start">
+<p class="text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Total Products</p>
+<span class="material-symbols-outlined text-primary-container text-xl" data-icon="inventory">inventory</span>
+</div>
+<div class="mt-4">
+<h2 class="text-headline-md">1,284</h2>
+<p class="text-[9px] text-green-500 font-label-bold mt-1 uppercase">+12 This Week</p>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-6 flex flex-col justify-between group hover:border-on-surface transition-colors">
+<div class="flex justify-between items-start">
+<p class="text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Total Orders</p>
+<span class="material-symbols-outlined text-primary-container text-xl" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div class="mt-4">
+<h2 class="text-headline-md">8,432</h2>
+<p class="text-[9px] text-green-500 font-label-bold mt-1 uppercase">+142 Since Monday</p>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-6 flex flex-col justify-between border-l-4 border-l-primary-container">
+<div class="flex justify-between items-start">
+<p class="text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Pending Orders</p>
+<span class="material-symbols-outlined text-primary-container text-xl" data-icon="pending_actions">pending_actions</span>
+</div>
+<div class="mt-4">
+<h2 class="text-headline-md">47</h2>
+<p class="text-[9px] text-primary-container font-label-bold mt-1 uppercase">Attention Required</p>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-6 flex flex-col justify-between group hover:border-on-surface transition-colors">
+<div class="flex justify-between items-start">
+<p class="text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Completed</p>
+<span class="material-symbols-outlined text-primary-container text-xl" data-icon="check_circle">check_circle</span>
+</div>
+<div class="mt-4">
+<h2 class="text-headline-md">7,921</h2>
+<p class="text-[9px] text-tertiary font-label-bold mt-1 uppercase">98.2% Fulfillment</p>
+</div>
+</div>
+<div class="bg-surface-container border border-error-container p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<p class="text-[10px] font-label-bold text-error uppercase tracking-widest">Low Stock</p>
+<span class="material-symbols-outlined text-error text-xl" data-icon="warning">warning</span>
+</div>
+<div class="mt-4">
+<h2 class="text-headline-md text-error">08</h2>
+<p class="text-[9px] text-error font-label-bold mt-1 uppercase">Critically Low SKU</p>
+</div>
+</div>
+</div>
+<!-- MAIN SECTIONS: ORDERS & TOP SELLING -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- RECENT ORDERS TABLE -->
+<div class="lg:col-span-2 bg-surface-container border border-outline-variant flex flex-col">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-lg uppercase tracking-tight">Recent Orders / الطلبات الأخيرة</h3>
+<button class="text-[10px] font-label-bold uppercase tracking-widest text-primary-container border border-primary-container px-4 py-1 hover:bg-primary-container hover:text-white transition-colors">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Order ID</th>
+<th class="px-6 py-4 text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Customer</th>
+<th class="px-6 py-4 text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Date</th>
+<th class="px-6 py-4 text-[10px] font-label-bold text-tertiary uppercase tracking-widest">Status</th>
+<th class="px-6 py-4 text-[10px] font-label-bold text-tertiary uppercase tracking-widest text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-label-bold text-xs uppercase tracking-tighter">#SMSM-9421</td>
+<td class="px-6 py-4 text-xs">Ahmed Al-Fahad</td>
+<td class="px-6 py-4 text-[10px] uppercase font-medium">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-900/30 text-green-500 text-[9px] font-bold uppercase tracking-widest border border-green-500/20">Shipped</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$899.00</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-label-bold text-xs uppercase tracking-tighter">#SMSM-9420</td>
+<td class="px-6 py-4 text-xs">Sarah Jenkins</td>
+<td class="px-6 py-4 text-[10px] uppercase font-medium">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-primary-container/20 text-primary-container text-[9px] font-bold uppercase tracking-widest border border-primary-container/20">Pending</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$450.00</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-label-bold text-xs uppercase tracking-tighter">#SMSM-9419</td>
+<td class="px-6 py-4 text-xs">Khalid Mansour</td>
+<td class="px-6 py-4 text-[10px] uppercase font-medium">Oct 23, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container-highest text-tertiary text-[9px] font-bold uppercase tracking-widest border border-outline-variant">Processing</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$1,220.00</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-label-bold text-xs uppercase tracking-tighter">#SMSM-9418</td>
+<td class="px-6 py-4 text-xs">James Wilson</td>
+<td class="px-6 py-4 text-[10px] uppercase font-medium">Oct 23, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-900/30 text-green-500 text-[9px] font-bold uppercase tracking-widest border border-green-500/20">Delivered</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$299.00</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-label-bold text-xs uppercase tracking-tighter">#SMSM-9417</td>
+<td class="px-6 py-4 text-xs">Fatima Al-Sayed</td>
+<td class="px-6 py-4 text-[10px] uppercase font-medium">Oct 22, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-red-900/30 text-red-500 text-[9px] font-bold uppercase tracking-widest border border-red-500/20">Cancelled</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$540.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- TOP SELLING PRODUCTS -->
+<div class="bg-surface-container border border-outline-variant flex flex-col">
+<div class="p-6 border-b border-outline-variant">
+<h3 class="font-headline-md text-lg uppercase tracking-tight">Top Selling / الأكثر مبيعاً</h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 bg-surface-container-low border border-outline-variant overflow-hidden flex-shrink-0">
+<img alt="Product 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A macro shot of a sleek, high-end limited edition sneaker silhouette featuring charcoal black knit textures and sharp cherry red racing stripes. The lighting is dramatic and moody with deep shadows and surgical highlights on the technical materials. The overall aesthetic is aggressive, modern, and elite, fitting a luxury urban sportswear collection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkh31KnpfsZ6CS_5iIf7pdGjQH0MiLNg_mG6SA393t2EoTb79MCJK2alVxgr_B7bQAGsrD3qMOU-o5xcAMGL2hJhvlL8apo1EVLYxr2xUYlZyPM3nlofiV-KsKpf-nvYbNjEi0QfewG5_WtMKs7J7Nky5LoYu5H3_19OJgnwKCxyqa47uGE1kFq3mDczIhL4BXRm_ezm80P8Trm654aqrMllbfeQwDuTjGGU3MXjP5hc0_i78Lv0WagVOMHAmaBp8cAKGHCKmCGA"/>
+</div>
+<div class="flex-1">
+<p class="text-[10px] font-label-bold text-primary-container uppercase">Sneakers</p>
+<p class="text-xs font-bold uppercase tracking-tight">Vanguard Elite Shadow</p>
+<div class="flex justify-between items-center mt-2">
+<p class="text-[10px] text-tertiary">142 Sales</p>
+<p class="text-xs font-bold">$249.00</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 bg-surface-container-low border border-outline-variant overflow-hidden flex-shrink-0">
+<img alt="Product 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up detail of a futuristic sports footwear piece emphasizing the translucent sole and neon red internal support structures. Set against a dark, industrial charcoal background with minimal lighting that creates a high-contrast minimalist look. The composition is sharp and precise, focusing on the mechanical beauty of performance craftsmanship in a premium boutique setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTzLR_ZQlLYOyfnmlLrC1NzFkzQWz9t0tJllYXT8CimoHBGdOCbz1RNjzDFxrhmV0bI4yDR5u9qsjvFNjceqoPMZV7-sfzWjhhJ0TncEbujbeIjznE-lh3O0jsM9qq8TBRWhz6H-4V2sJ7Mvg85CWDyog_Zx4cFQr-LvBmgESf7EJiig36O6KGh1u73v-MO3251GITaEmNmMP5G_btBCCaxjjGlbaGebk5_KQ6tIWWgyvqpreQeA8E8ismE1Yy6lRMCDBbgpy9hw"/>
+</div>
+<div class="flex-1">
+<p class="text-[10px] font-label-bold text-primary-container uppercase">Exclusive Drop</p>
+<p class="text-xs font-bold uppercase tracking-tight">Neon Pulse Runner</p>
+<div class="flex justify-between items-center mt-2">
+<p class="text-[10px] text-tertiary">98 Sales</p>
+<p class="text-xs font-bold">$310.00</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 bg-surface-container-low border border-outline-variant overflow-hidden flex-shrink-0">
+<img alt="Product 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional product photograph of a white and red basketball sneaker resting on a dark reflective surface. The lighting is cold and precise, typical of high-end sneaker photography, highlighting the stitch quality and material textures. The background is a void of deep black, making the red accents of the shoe pop with intense vibrancy, creating an atmosphere of exclusive luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgyKWsX1rc0Bp7-lCEBMQYSHIIuABYWoQX19upPTIG-UbtvUkx8iV2andYCIJxZ-ZDMo0jhlqAdrByhIPQlAS-ivlA5ECUYFGTeGDOcKaCoBuVomjayyNJ55F9L3T8Ol2egjE-WVBDxH4Nx8rAkMbvCkS9zKXru5mVsF02rp3RtZPPm8Oq4RU7yuHmCpdHl-ZPC9hpuPLVBQwwJ28oiHL5CnGXrrX5sgtqm7Lr7GFcujNUFNhwMhzM740Iw6PS7Pak2wYfIx2hhg"/>
+</div>
+<div class="flex-1">
+<p class="text-[10px] font-label-bold text-primary-container uppercase">Accessories</p>
+<p class="text-xs font-bold uppercase tracking-tight">Titan Mesh Core</p>
+<div class="flex justify-between items-center mt-2">
+<p class="text-[10px] text-tertiary">76 Sales</p>
+<p class="text-xs font-bold">$185.00</p>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full py-3 bg-neutral-900 border border-outline-variant text-[10px] font-label-bold uppercase tracking-[0.2em] hover:bg-neutral-800 transition-colors">Download Performance Report</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ANALYTICS PREVIEW -->
+<div class="bg-surface-container border border-outline-variant p-6">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline-md text-lg uppercase tracking-tight">Revenue Analytics / تحليلات الإيرادات</h3>
+<p class="text-[10px] font-label-bold text-tertiary uppercase tracking-widest mt-1">Last 30 Days Growth Matrix</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1 text-[9px] font-bold uppercase tracking-widest bg-primary-container text-white">Monthly</button>
+<button class="px-4 py-1 text-[9px] font-bold uppercase tracking-widest bg-surface-container-high text-tertiary border border-outline-variant hover:text-white transition-colors">Weekly</button>
+</div>
+</div>
+<!-- FAKE CHART VISUALIZATION -->
+<div class="h-64 flex items-end gap-2 w-full pb-6">
+<div class="flex-1 bg-surface-container-highest border-t-2 border-primary-container h-[40%] opacity-20 hover:opacity-100 transition-opacity relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] opacity-0 group-hover:opacity-100">$12k</span>
+</div>
+<div class="flex-1 bg-surface-container-highest border-t-2 border-primary-container h-[55%] opacity-20 hover:opacity-100 transition-opacity relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] opacity-0 group-hover:opacity-100">$18k</span>
+</div>
+<div class="flex-1 bg-surface-container-highest border-t-2 border-primary-container h-[45%] opacity-20 hover:opacity-100 transition-opacity relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] opacity-0 group-hover:opacity-100">$15k</span>
+</div>
+<div class="flex-1 bg-primary-container h-[85%] relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] font-bold">$29k</div>
+<div class="absolute inset-0 bg-white/10 opacity-20 group-hover:opacity-40 transition-opacity"></div>
+</div>
+<div class="flex-1 bg-surface-container-highest border-t-2 border-primary-container h-[60%] opacity-20 hover:opacity-100 transition-opacity relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] opacity-0 group-hover:opacity-100">$20k</span>
+</div>
+<div class="flex-1 bg-surface-container-highest border-t-2 border-primary-container h-[50%] opacity-20 hover:opacity-100 transition-opacity relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] opacity-0 group-hover:opacity-100">$16k</span>
+</div>
+<div class="flex-1 bg-surface-container-highest border-t-2 border-primary-container h-[75%] opacity-20 hover:opacity-100 transition-opacity relative group">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] opacity-0 group-hover:opacity-100">$24k</span>
+</div>
+</div>
+<div class="flex justify-between text-[8px] font-bold text-tertiary uppercase tracking-widest pt-4 border-t border-outline-variant">
+<span>WK 01</span>
+<span>WK 02</span>
+<span>WK 03</span>
+<span class="text-primary-container">CURRENT WK</span>
+<span>WK 05</span>
+<span>WK 06</span>
+<span>WK 07</span>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="mt-auto bg-neutral-950 border-t border-neutral-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-16 max-w-7xl mx-auto">
+<div class="md:col-span-2">
+<div class="text-xl font-black text-neutral-50 dark:text-neutral-50 uppercase tracking-widest italic mb-4">SMSM STORE</div>
+<p class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-red-600 mb-2">© 2024 SMSM STORE. ENGINEERED FOR THE ELITE.</p>
+<p class="text-[10px] text-neutral-500 uppercase leading-relaxed max-w-md">Proprietary administrative terminal for SMSM Global Operations. Authorized access only. All system interactions are logged and audited.</p>
+</div>
+<div>
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-300 mb-6">Internal Links</h4>
+<ul class="space-y-4">
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity" href="#">Logistics Protocol</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity" href="#">Security Vault</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity" href="#">API Documentation</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-300 mb-6">Support Hub</h4>
+<ul class="space-y-4">
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity" href="#">Submit Ticket</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity" href="#">Server Status</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity" href="#">Contact Tech Ops</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

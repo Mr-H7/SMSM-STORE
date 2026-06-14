@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "on-tertiary-container": "#e6e3e2",
+                "tertiary-fixed-dim": "#c8c6c5",
+                "tertiary-fixed": "#e5e2e1",
+                "surface-container-lowest": "#0e0e0e",
+                "secondary-fixed": "#e4e2dc",
+                "on-error": "#690005",
+                "tertiary": "#c8c6c5",
+                "on-surface": "#e5e2e1",
+                "tertiary-container": "#666565",
+                "surface-container": "#201f1f",
+                "surface-dim": "#131313",
+                "error-container": "#93000a",
+                "inverse-on-surface": "#313030",
+                "on-primary": "#690000",
+                "secondary-container": "#474742",
+                "surface-container-high": "#2a2a2a",
+                "surface-container-low": "#1c1b1b",
+                "on-secondary-fixed": "#1b1c18",
+                "on-primary-fixed-variant": "#930000",
+                "on-error-container": "#ffdad6",
+                "outline-variant": "#5e3f3a",
+                "on-background": "#e5e2e1",
+                "surface-variant": "#353534",
+                "primary-container": "#cd0000",
+                "on-tertiary-fixed-variant": "#474746",
+                "inverse-primary": "#c00000",
+                "on-tertiary": "#313030",
+                "inverse-surface": "#e5e2e1",
+                "outline": "#ae8881",
+                "on-primary-fixed": "#410000",
+                "surface-tint": "#ffb4a8",
+                "on-tertiary-fixed": "#1c1b1b",
+                "primary-fixed": "#ffdad4",
+                "on-primary-container": "#ffdbd5",
+                "surface-bright": "#3a3939",
+                "error": "#ffb4ab",
+                "surface-container-highest": "#353534",
+                "on-secondary": "#30312c",
+                "secondary": "#c8c6c0",
+                "primary": "#ffb4a8",
+                "primary-fixed-dim": "#ffb4a8",
+                "surface": "#131313",
+                "secondary-fixed-dim": "#c8c6c0",
+                "background": "#131313",
+                "on-surface-variant": "#e8bdb6",
+                "on-secondary-fixed-variant": "#474742",
+                "on-secondary-container": "#b6b5af"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "container-max": "1440px",
+                "stack-lg": "48px",
+                "margin-mobile": "16px",
+                "stack-sm": "8px",
+                "stack-md": "24px",
+                "unit": "4px",
+                "gutter": "24px",
+                "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                "headline-xl": ["Space Grotesk"],
+                "label-bold": ["Inter"],
+                "label-sm": ["Inter"],
+                "headline-lg": ["Space Grotesk"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-md": ["Space Grotesk"]
+              },
+              "fontSize": {
+                "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0F0F0F;
+            color: #EFEDE6;
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(15,15,15,0) 0%, rgba(15,15,15,1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopAppBar -->
+<header class="bg-neutral-950 dark:bg-neutral-950 docked full-width top-0 border-b z-50 border-neutral-900 dark:border-neutral-800 flat no shadows sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black text-neutral-50 dark:text-neutral-50 italic">SMSM STORE</div>
+<nav class="hidden md:flex gap-8">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">New Drops</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-red-600 border-b-2 border-red-600 pb-1" href="#">Collections</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">Limited</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">Accessories</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-neutral-400 hover:bg-neutral-900 dark:hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out" data-icon="search">search</button>
+<button class="material-symbols-outlined p-2 text-neutral-400 hover:bg-neutral-900 dark:hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out" data-icon="shopping_cart">shopping_cart</button>
+<button class="hidden lg:block bg-primary-container text-white px-4 py-2 font-['Space_Grotesk'] uppercase text-xs font-bold tracking-widest hover:brightness-125 transition-all">Order WhatsApp</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[819px] flex flex-col justify-end overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover grayscale brightness-50" data-alt="A professional studio shot of a high-performance sneaker floating in a dark, atmospheric environment. The lighting is focused and dramatic, highlighting the technical materials and textures of the shoe. The color palette is dominated by deep blacks and cool grays, with intense surgical splashes of cherry red light. The overall mood is aggressive, exclusive, and representative of a luxury footwear drop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsEErryeZFVe-5lYa8WbrLdverJ7fYiiN9wLx920EpA9fzbgpL35ZY6urita6NotvCgbpTE-lCuQMsO7_scvtDel030E6RUHNgOOo1X3UrFTIhXPjgoT8ZyGrwP-uQ9LwlziH_BJAMtf0LsWXSqE6y0Vi3UL2DICsSNgp4D5sAQVuIFFCTZDNu5cY4g10FG58TDWkXmU_6uLcq2-JjwEIZmNgWtH-_Aecdd6KIv-315WxJ1Uz4uDoG-5MpvkX8aCUMD86m3JHB1A"/>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="relative z-10 px-8 pb-24 max-w-7xl mx-auto w-full">
+<div class="inline-block bg-primary-container text-white px-4 py-1 mb-6 text-label-bold uppercase">Limited Time</div>
+<h1 class="font-headline-xl text-on-background mb-4 uppercase">
+                    SEASONAL CLEARANCE<br/>
+<span class="text-primary-container">تصفيات الموسم</span>
+</h1>
+<p class="font-body-lg text-neutral-400 max-w-2xl mb-8 uppercase tracking-tighter">
+                    Engineered for the elite. Archive silhouettes and performance icons now available at exclusive rates. Once they're gone, they're gone.
+                </p>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 font-headline-md uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">
+                        Shop Offers
+                    </button>
+<button class="border border-on-background text-on-background px-8 py-4 font-headline-md uppercase tracking-widest hover:bg-on-background hover:text-background transition-all">
+                        View All
+                    </button>
+</div>
+</div>
+</section>
+<!-- Filters & Category Strip -->
+<section class="border-y border-neutral-900 bg-neutral-950/50 backdrop-blur-md sticky top-[73px] z-40">
+<div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center overflow-x-auto gap-8">
+<div class="flex gap-8 whitespace-nowrap">
+<button class="text-red-600 font-label-bold uppercase border-b border-red-600">All Items</button>
+<button class="text-neutral-500 font-label-bold uppercase hover:text-neutral-50 transition-colors">Performance</button>
+<button class="text-neutral-500 font-label-bold uppercase hover:text-neutral-50 transition-colors">Lifestyle</button>
+<button class="text-neutral-500 font-label-bold uppercase hover:text-neutral-50 transition-colors">High-Top</button>
+<button class="text-neutral-500 font-label-bold uppercase hover:text-neutral-50 transition-colors">Limited</button>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-neutral-500 uppercase">Sort By:</span>
+<button class="font-label-bold uppercase flex items-center gap-2">
+                        Highest Discount <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Products Grid -->
+<section class="px-8 py-16 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group relative bg-surface-container border border-neutral-800 transition-all hover:border-neutral-50">
+<div class="absolute top-0 left-0 z-10 bg-primary-container text-white px-3 py-1 font-label-bold text-xs uppercase">-40%</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A clean, minimalist product photograph of a white and gray luxury leather sneaker against a solid dark gray background. The lighting is crisp and surgical, emphasizing the fine stitching and premium leather texture. The image is framed perfectly to show the silhouette's athletic but high-end profile, aligned with the boutique SMSM STORE aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlLiCJptuaRKLa1KzfKaIYifdaNuiHcBXXteA9vvba15dkUh66KIhUEo2zTmf1OFxGKMjj0LYYj-WxSsADcpY6CQrWirARQTJf-LFQadga-6AsOEeNjpnKco13dVbxFIfIgZVdEELgmV3fVUY3VJwjMDdwoiJkDOtI4xU4LLR-tcABj8YftU2ki54ZsWG_-xTImKCOv5hT9U38QWhPqRe5XXcX6-wS07vJhiV0dfd1N-ucmQmvnnVzb4EAVDuOVvhuBciHNLbE7A"/>
+</div>
+<div class="p-6">
+<p class="font-label-sm text-neutral-500 uppercase mb-1">Performance Elite</p>
+<h3 class="font-headline-md text-on-background mb-4 uppercase">Apex Runner v2</h3>
+<div class="flex items-end gap-3 mb-6">
+<span class="text-primary-container font-headline-md">$144.00</span>
+<span class="text-neutral-500 line-through text-label-bold">$240.00</span>
+</div>
+<button class="w-full border border-neutral-700 text-on-background py-3 font-label-bold uppercase hover:bg-on-background hover:text-background transition-all">Shop Now</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative bg-surface-container border border-neutral-800 transition-all hover:border-neutral-50">
+<div class="absolute top-0 left-0 z-10 bg-primary-container text-white px-3 py-1 font-label-bold text-xs uppercase">-30%</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A high-contrast fashion product shot of a vibrant, multi-colored sneaker featuring bold patterns and technical mesh. The shoe is positioned dynamically against a deep black void background. Bright red accent lighting catches the edges of the sneaker, reinforcing the SMSM STORE brand color scheme and high-energy luxury atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq-HpywkGREI-W6B3sKRYdd4FGV_vyfx8EEJuWDaZq9c5-yKEF9qi4h4Phb_jiThl_t04Sqczln7ToQ1gEtBwxwgpCEhMKWE0ylxSdxs0IoWPkSOmzg1O5a5WRr6MnKfcTClZtESQOLh5YBO4Vonj2BYOAv6oAWHtAsVdan-YgHaeZOA0RP-pC8A9Omfx4Rdn_kWrleb2JfJhlStYK3-Sir_E36LYu14KhRFonCNl-vIOZ0aGVlfA2ZfA0vim5Y8Ggr3imHq2dVQ"/>
+</div>
+<div class="p-6">
+<p class="font-label-sm text-neutral-500 uppercase mb-1">Urban Lifestyle</p>
+<h3 class="font-headline-md text-on-background mb-4 uppercase">Neon Street X</h3>
+<div class="flex items-end gap-3 mb-6">
+<span class="text-primary-container font-headline-md">$112.00</span>
+<span class="text-neutral-500 line-through text-label-bold">$160.00</span>
+</div>
+<button class="w-full border border-neutral-700 text-on-background py-3 font-label-bold uppercase hover:bg-on-background hover:text-background transition-all">Shop Now</button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative bg-surface-container border border-neutral-800 transition-all hover:border-neutral-50">
+<div class="absolute top-0 left-0 z-10 bg-primary-container text-white px-3 py-1 font-label-bold text-xs uppercase">-50%</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A close-up, detailed shot of a classic suede sneaker in tan and cream tones. The focus is on the rich texture of the suede and the precision of the rubber sole construction. The image conveys a sense of artisanal quality and timeless luxury, set against a dark, minimalist architectural background with subtle red shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8I1wRh-Sxra__n40PRNKa6W_F-rkSEBnTriWeTmERFEUqH7b7rmaTh4fyEg0Po4Br9LwXPEjSH-cLwrSURPkCYYDZ1f1Sk-0iu9-ikiHBFQm7s4MGCGzHe2cFl-TjG9CZcKPsMIhuboBDbDnOIQNCs-DMZwJQyqvwu15hUtQClCQO3_jeGLDNiyzFtwTXa4ypnPiEas3HOd2hod07mVSJE0wpaBdVaevzT-0d85_coDiTed9dKOcymGUgIiLBrgX7WN88MCReIw"/>
+</div>
+<div class="p-6">
+<p class="font-label-sm text-neutral-500 uppercase mb-1">Craft Series</p>
+<h3 class="font-headline-md text-on-background mb-4 uppercase">Heritage Suede</h3>
+<div class="flex items-end gap-3 mb-6">
+<span class="text-primary-container font-headline-md">$90.00</span>
+<span class="text-neutral-500 line-through text-label-bold">$180.00</span>
+</div>
+<button class="w-full border border-neutral-700 text-on-background py-3 font-label-bold uppercase hover:bg-on-background hover:text-background transition-all">Shop Now</button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative bg-surface-container border border-neutral-800 transition-all hover:border-neutral-50">
+<div class="absolute top-0 left-0 z-10 bg-primary-container text-white px-3 py-1 font-label-bold text-xs uppercase">-25%</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A striking red athletic shoe captured in mid-air as if caught in a moment of high-speed motion. The background is a stark, clean black, which makes the cherry red color of the shoe vibrate with energy. The lighting is cinematic, utilizing rim lights to define the silhouette against the dark environment, perfect for a high-impact luxury store." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC154szpXA9Mp8wYC0sa0xkGXwF_QCj3yI-0bmNs1zt7v-Zl-W5Dj3nOr62NSfzeNWl4qr1u24XrnNcyGeH9rWdFvKg2mt_5TQbxZavAMk6HD76iL7_h9qvkpaR5buQ7fASCem15XymAABDP1q0KhH_Nb1JrTABlW_Sk7fhA2w-7f8gsa4QI7PufNOj3nhtG_aNfChXQMR82rWdPQNRpq_kX3Wh-j4QRnfivet_BlCg046VzxuL4irfBxN7W3Y44PUqw0wIWrFlgQ"/>
+</div>
+<div class="p-6">
+<p class="font-label-sm text-neutral-500 uppercase mb-1">High Alert</p>
+<h3 class="font-headline-md text-on-background mb-4 uppercase">Velocity Red</h3>
+<div class="flex items-end gap-3 mb-6">
+<span class="text-primary-container font-headline-md">$150.00</span>
+<span class="text-neutral-500 line-through text-label-bold">$200.00</span>
+</div>
+<button class="w-full border border-neutral-700 text-on-background py-3 font-label-bold uppercase hover:bg-on-background hover:text-background transition-all">Shop Now</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Urgency CTA -->
+<section class="bg-neutral-900 border-y border-neutral-800 py-24 px-8">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="font-headline-lg uppercase mb-6">Never Miss a Drop</h2>
+<p class="font-body-lg text-neutral-400 mb-10 uppercase tracking-tighter">Sign up to receive early access to seasonal clearances and exclusive limited releases. Join the elite.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<input class="flex-1 bg-surface-container-low border border-neutral-800 p-4 text-label-bold uppercase focus:border-primary-container focus:ring-0 outline-none transition-all" placeholder="EMAIL ADDRESS" type="email"/>
+<button class="bg-on-background text-background px-12 py-4 font-label-bold uppercase hover:bg-primary-container hover:text-white transition-all">Subscribe</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 dark:bg-neutral-950 full-width border-t mt-auto border-neutral-900 dark:border-neutral-800 flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-16 max-w-7xl mx-auto font-['Space_Grotesk'] text-xs uppercase tracking-tighter">
+<div class="col-span-1 md:col-span-1">
+<div class="text-xl font-black text-neutral-50 dark:text-neutral-50 mb-6">SMSM STORE</div>
+<p class="text-neutral-500 leading-relaxed max-w-[200px]">THE DEFINITIVE SOURCE FOR CURATED FOOTWEAR AND PERFORMANCE GEAR.</p>
+</div>
+<div>
+<h4 class="text-neutral-50 font-bold mb-6">Shop</h4>
+<ul class="space-y-3">
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">New Drops</a></li>
+<li><a class="text-red-600 font-bold" href="#">Seasonal Sale</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">Collections</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">Limited</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-neutral-50 font-bold mb-6">Support</h4>
+<ul class="space-y-3">
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">Shipping Policy</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">Size Guide</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">Returns</a></li>
+<li><a class="text-neutral-500 hover:text-neutral-50 hover:text-red-600 transition-opacity" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-neutral-50 font-bold mb-6">Follow</h4>
+<div class="flex gap-4">
+<a class="material-symbols-outlined text-neutral-500 hover:text-red-600" href="#">brand_awareness</a>
+<a class="material-symbols-outlined text-neutral-500 hover:text-red-600" href="#">public</a>
+<a class="material-symbols-outlined text-neutral-500 hover:text-red-600" href="#">chat_bubble</a>
+</div>
+</div>
+</div>
+<div class="border-t border-neutral-900 py-8 px-8 text-center text-neutral-600 font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em]">
+            © 2024 SMSM STORE. ENGINEERED FOR THE ELITE.
+        </div>
+</footer>
+</body></html>

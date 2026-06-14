@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#e6e3e2",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "tertiary-fixed": "#e5e2e1",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary-fixed": "#e4e2dc",
+                      "on-error": "#690005",
+                      "tertiary": "#c8c6c5",
+                      "on-surface": "#e5e2e1",
+                      "tertiary-container": "#666565",
+                      "surface-container": "#201f1f",
+                      "surface-dim": "#131313",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#313030",
+                      "on-primary": "#690000",
+                      "secondary-container": "#474742",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container-low": "#1c1b1b",
+                      "on-secondary-fixed": "#1b1c18",
+                      "on-primary-fixed-variant": "#930000",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#5e3f3a",
+                      "on-background": "#e5e2e1",
+                      "surface-variant": "#353534",
+                      "primary-container": "#cd0000",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "inverse-primary": "#c00000",
+                      "on-tertiary": "#313030",
+                      "inverse-surface": "#e5e2e1",
+                      "outline": "#ae8881",
+                      "on-primary-fixed": "#410000",
+                      "surface-tint": "#ffb4a8",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "primary-fixed": "#ffdad4",
+                      "on-primary-container": "#ffdbd5",
+                      "surface-bright": "#3a3939",
+                      "error": "#ffb4ab",
+                      "surface-container-highest": "#353534",
+                      "on-secondary": "#30312c",
+                      "secondary": "#c8c6c0",
+                      "primary": "#ffb4a8",
+                      "primary-fixed-dim": "#ffb4a8",
+                      "surface": "#131313",
+                      "secondary-fixed-dim": "#c8c6c0",
+                      "background": "#131313",
+                      "on-surface-variant": "#e8bdb6",
+                      "on-secondary-fixed-variant": "#474742",
+                      "on-secondary-container": "#b6b5af"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "stack-lg": "48px",
+                      "margin-mobile": "16px",
+                      "stack-sm": "8px",
+                      "stack-md": "24px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Space Grotesk"],
+                      "label-bold": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Space Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .category-card:hover .card-border {
+            border-color: #cd0000;
+        }
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-white">
+<!-- TopAppBar -->
+<header class="bg-neutral-950 dark:bg-neutral-950 docked full-width top-0 border-b z-50 border-neutral-900 dark:border-neutral-800 flat no shadows sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-black text-neutral-50 dark:text-neutral-50 italic font-headline-xl" href="#">SMSM STORE</a>
+<nav class="hidden md:flex gap-6">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">New Drops</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-red-600 border-b-2 border-red-600 pb-1" href="#">Collections</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">Limited</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">Accessories</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 border border-neutral-800 bg-neutral-900 rounded-lg">
+<span class="material-symbols-outlined text-sm text-neutral-500">search</span>
+<input class="bg-transparent border-none text-[10px] uppercase font-bold tracking-widest focus:ring-0 text-neutral-300 w-32" placeholder="SEARCH DROPS..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-neutral-400 hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-neutral-400 hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out relative">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-red-600 rounded-full"></span>
+</button>
+<button class="p-2 text-neutral-400 hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+</div>
+<button class="hidden sm:block px-4 py-2 bg-red-700 hover:bg-red-600 text-white font-['Space_Grotesk'] uppercase text-[10px] font-black tracking-widest active:scale-95 duration-200">
+                    Order WhatsApp
+                </button>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 py-12">
+<!-- Header Section -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-l-4 border-red-700 pl-6">
+<div>
+<span class="font-label-bold text-red-600 uppercase tracking-[0.3em] mb-2 block">Curation Hub</span>
+<h1 class="font-headline-xl text-neutral-50 uppercase leading-none">Browse by<br/><span class="text-neutral-500">Category</span></h1>
+</div>
+<p class="max-w-md font-body-lg text-neutral-400 italic">
+                    Engineered for the elite. Explore our highly specialized footwear classifications from technical performance to street-ready silhouettes.
+                </p>
+</div>
+</section>
+<!-- Category Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Category: Sneakers (Large) -->
+<div class="lg:col-span-2 lg:row-span-2 relative group overflow-hidden bg-surface-container-lowest border border-neutral-900 category-card card-border transition-colors duration-300">
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" data-alt="A pair of ultra-modern high-performance sneakers in a deep black and metallic silver colorway, positioned dynamically in a dark minimalist studio. Dramatic red neon accent lighting cuts across the background, emphasizing the technical mesh and architectural sole. The mood is aggressive, premium, and focused on high-end streetwear culture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0ee2zsLSSM96TwQeGGVIISj3jpLJLgkpSAp6IVQB-aZfTeDN-2fltMe8LtpaImUr0tMdJc5cR206e8zhnkjvOMS8SXE3eJG2Dhzv1KaHKaKPSBQrrxFhik3-ulg8i35Gd0Ul7WJ01zpAtXUiA-BC1SbIJAsURqwL6FfP7dQdR97R6umlq0-8klcXE4SlaiSb1I9dOP-nwEU6z5I-JkRduziY2CCKuiOx6LfmqUx1P8uAIAsdmN7S8oiTkAVjCzN_kAzfwwWr6Zg"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-white uppercase leading-none mb-1">Sneakers</h2>
+<h3 class="text-red-600 font-headline-md font-black tracking-tighter uppercase">أحذية رياضية</h3>
+</div>
+<span class="material-symbols-outlined text-red-600 text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Category: Sport Shoes -->
+<div class="relative group overflow-hidden bg-surface-container-lowest border border-neutral-900 category-card card-border transition-colors duration-300 h-[300px] lg:h-auto">
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" data-alt="A vibrant red performance running shoe captured mid-motion against a stark dark background. Fine beads of water or sweat are visible on the high-tech knit upper, highlighted by a sharp white spotlight. The composition is sleek and technical, reflecting peak athletic performance and elite engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzaaUXeuRAY-N6HWMzP6GRWe2l-sFKRHeEcoJ8jL-bxQ62p-oiR-2NqFSpqoS5eotoX2lhEkmL28ySeYBpx_EHPIeGf8QoejVVXMeozYwx2mtnpmA0C1DwWKQreWFf6QrTl8v9Xh5yDPcSJsvkP-l8EVfGlPDyDZCt4ZquGxwmvRz8rfwpNBnoKG0fFp6MQzHuYjbI6tlwALBOsGxKAhZSSNZI-K47XklDBg-sNq3o9xRyrrBhgSIfLMH1loQWFwAFOUzEcoD79Q"/>
+<div class="absolute bottom-0 left-0 p-6 z-20">
+<h2 class="font-headline-md text-white uppercase">Sport Shoes</h2>
+<h3 class="text-neutral-400 font-label-bold uppercase">أحذية رياضة</h3>
+</div>
+</div>
+<!-- Category: Casual Shoes -->
+<div class="relative group overflow-hidden bg-surface-container-lowest border border-neutral-900 category-card card-border transition-colors duration-300 h-[300px] lg:h-auto">
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" data-alt="Clean, minimalist white and cream casual leather sneakers presented on a concrete pedestal in a brutalist dark gray environment. Soft overhead lighting creates subtle shadows that emphasize the premium leather texture and perfect stitching. The aesthetic is sophisticated, urban, and quietly luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTelO7BPl0QN0I2_RnoYZ0W0HeOIk_fmyvjCjDS0SU2xLwrgMtJ4AqpcVnUrMla5swLDook74IvYxNu_bAKawhgb_AYmePaw8TEkpJPL7cHFkC3dvGAshuVZcFyEP_nfca-y9Y0_tf-IAt5qw7nwqCcM7jAkiZUZu3aWg5LAuBepZ-GBrqZhSkptlJyiszGYYNhegh0sAzFne5ptqe_kqvol0vBxZ11PTmYOCgTabTBfHrV6FNrqVCHN-NStJwihALXTq_1QaHRw"/>
+<div class="absolute bottom-0 left-0 p-6 z-20">
+<h2 class="font-headline-md text-white uppercase">Casual Shoes</h2>
+<h3 class="text-neutral-400 font-label-bold uppercase">أحذية كاجوال</h3>
+</div>
+</div>
+<!-- Category: Black Collection (Wide) -->
+<div class="md:col-span-2 relative group overflow-hidden bg-surface-container-lowest border border-neutral-900 category-card card-border transition-colors duration-300 h-[300px]">
+<div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" data-alt="A row of premium all-black sneakers showcasing different textures from matte suede to glossy carbon fiber accents. The scene is illuminated by thin, surgical lines of red light that reveal the silhouettes in a dark, high-contrast vault setting. The mood is mysterious, elite, and intensely focused on the color black." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwKay1pcHWY_86FqYIvfUEMag9rMCMf_lW0bTT1Yky9WUoO_i6KxjN_RGq4b54yl0xEMfuwB0gD3NuzF8H8vR9kUmHm68ZPgHX7Whj8ncpDii2Smqr3EPV_-TOK1lqaGmljmaWz1hn3wsXJbpt0DH3sAxxaPeAE5u0FHegjtZ8yIXyoOpL0JUs__4L04NwaIqQ2qBYSdbVF8upxCbVEEdO2Zk_HfXYTWPzCypssxaZ-aW-jo3Y7GW_Iocw1Rlrftc87DG6Qrhp4Q"/>
+<div class="absolute inset-y-0 left-0 p-8 z-20 flex flex-col justify-center">
+<span class="bg-red-700 text-white px-3 py-1 text-[10px] font-black w-fit mb-4">EXCLUSIVE DROP</span>
+<h2 class="font-headline-lg text-white uppercase leading-tight">Black<br/>Collection</h2>
+<h3 class="text-red-600 font-headline-md font-black uppercase">المجموعة السوداء</h3>
+</div>
+</div>
+<!-- Category: White Collection -->
+<div class="relative group overflow-hidden bg-surface-container-lowest border border-neutral-900 category-card card-border transition-colors duration-300 h-[300px]">
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" data-alt="A pair of pristine white luxury sneakers suspended in a dark void. The shoes are perfectly lit to highlight the varying shades of ivory and pure white materials. Subtle smoke or vapor trails add a dynamic, ethereal quality to the image, contrasted against the deep charcoal background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0mVggJKB8kck-zXaOzJ6xPccWglCLhGUa3U_P3OJUzoFluhfEXlaXvJkPW_BU2Vd5xB_QOYrzzj6AcYu2rKzFWVbogryZD-KQz010YdagQWavoFtk3RXlwCkKxY3fnWqaBERR1vR0BdpyIuAQsG65XGL3NXZrm_FWKuPC04D26idLIrFND73O9h9ISV_Rpy9FrL-J1e5l0QMPXeAHPwt0jpFO_JcuMhWWcqa6XdIh7w72UvgAQu48FhVUtfR5GJ7pr1BMy_PkZw"/>
+<div class="absolute bottom-0 left-0 p-6 z-20">
+<h2 class="font-headline-md text-white uppercase">White Collection</h2>
+<h3 class="text-neutral-400 font-label-bold uppercase">المجموعة البيضاء</h3>
+</div>
+</div>
+<!-- Category: Men Shoes -->
+<div class="relative group overflow-hidden bg-surface-container-lowest border border-neutral-900 category-card card-border transition-colors duration-300 h-[300px]">
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out" data-alt="Rugged yet refined men's boots and sneakers displayed in a high-end workshop setting. The lighting is warm and directional, catching the grain of premium leather and the heavy-duty industrial soles. The atmosphere is masculine, authoritative, and speaks to timeless craftsmanship and durability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnS1buJGdncu7jmLoF3VUGDArKRwtEENHIWU3bq963uRSVtw0j09ENQl7H5NSvn8DzWLsqZUn06BU7tEXrQ6KHyKoxIb1nsiwJKqMe0rQw5Pe7Ya4tTfSfVtcr4kO7pbj5KGift1vnczEJtS9O4LJ8X7PDYWx0h9TQNAYqbzkIz7SIBTfi5GK2WZ01BxufciH5lt1CfFLsCPT6a_YY7b_vIpQH_r69flW46J6S281MfuXjeP5555i386QuIgeu52NAbzrRxbpJVQ"/>
+<div class="absolute bottom-0 left-0 p-6 z-20">
+<h2 class="font-headline-md text-white uppercase">Men Shoes</h2>
+<h3 class="text-neutral-400 font-label-bold uppercase">أحذية رجالية</h3>
+</div>
+</div>
+<!-- Category: Offers (Call to Action) -->
+<div class="md:col-span-2 lg:col-span-4 relative group overflow-hidden bg-red-700 border border-red-800 category-card transition-colors duration-300 h-[250px] flex items-center justify-center">
+<div class="absolute inset-0 opacity-10">
+<img class="w-full h-full object-cover" data-alt="A repeating pattern of high-performance sneaker outsoles creating a technical, industrial texture. The entire image is bathed in a deep red monochrome wash with high contrast between light and shadow. The aesthetic is rhythmic, mechanical, and evocative of a mass-production elite facility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5plNZ0AYs3aw4Cieuhxx3v0HFkIW-BfAPQ4XRl2zV40zznpejryB8HxWejTjsSWaJQnvNZtTBeZzyFbLK_pC38Hs0G-s6VfbJDf-16xJV9uqiOr5EoRfqsotePldWaCyM_16C7OHAQq5WOm4WjkBOblhpY73McHrWyfugKx6_JXMKnQqcdQh73IUpRIlt-96M6jkdWzt9iHipsorzDL3T4KnTqyOwicr9ASM2HpLYhGBz3CSuSNgiTPbzntHoN3x3_2vW_sNhgQ"/>
+</div>
+<div class="relative z-20 text-center flex flex-col items-center">
+<span class="font-label-bold text-white/80 uppercase tracking-[0.5em] mb-2">LIMITED TIME ACCESS</span>
+<h2 class="font-headline-xl text-white uppercase leading-none mb-4">SEASONAL OFFERS</h2>
+<div class="flex items-center gap-4">
+<span class="text-white font-headline-md font-black uppercase">عروض خاصة</span>
+<div class="h-[1px] w-12 bg-white/50"></div>
+<button class="px-8 py-3 bg-white text-red-700 font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform active:scale-95">Shop Sale</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 dark:bg-neutral-950 full-width border-t mt-auto border-neutral-900 dark:border-neutral-800 flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-16 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<h4 class="text-xl font-black text-neutral-50 dark:text-neutral-50 font-headline-md mb-6 uppercase italic">SMSM STORE</h4>
+<p class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 leading-relaxed">
+                    The ultimate destination for the sneaker elite. We specialize in limited editions, performance engineering, and the culture of footwear.
+                </p>
+<div class="flex gap-4 mt-8">
+<a class="w-8 h-8 rounded-full border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-red-600 hover:border-red-600 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">chat</span>
+</a>
+<a class="w-8 h-8 rounded-full border border-neutral-800 flex items-center justify-center text-neutral-500 hover:text-red-600 hover:border-red-600 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">language</span>
+</a>
+</div>
+</div>
+<div class="md:col-span-1">
+<h5 class="text-red-600 font-bold uppercase text-[10px] tracking-[0.2em] mb-6">Explore</h5>
+<ul class="flex flex-col gap-3">
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">New Drops</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-red-600 font-bold" href="#">Collections</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Limited</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Accessories</a></li>
+</ul>
+</div>
+<div class="md:col-span-1">
+<h5 class="text-red-600 font-bold uppercase text-[10px] tracking-[0.2em] mb-6">Support</h5>
+<ul class="flex flex-col gap-3">
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Shipping Policy</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Size Guide</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Returns</a></li>
+<li><a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-neutral-50 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Store Locator</a></li>
+</ul>
+</div>
+<div class="md:col-span-1">
+<h5 class="text-red-600 font-bold uppercase text-[10px] tracking-[0.2em] mb-6">Newsletter</h5>
+<p class="text-neutral-500 text-[10px] uppercase font-bold mb-4">JOIN THE ELITE LIST FOR EARLY ACCESS.</p>
+<div class="flex">
+<input class="bg-neutral-900 border-neutral-800 text-[10px] w-full focus:ring-red-600 focus:border-red-600 text-white p-3" placeholder="EMAIL ADDRESS" type="email"/>
+<button class="bg-red-700 px-4 flex items-center justify-center text-white hover:bg-red-600">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-neutral-900 py-6 px-8 text-center">
+<span class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-600">© 2024 SMSM STORE. ENGINEERED FOR THE ELITE.</span>
+</div>
+</footer>
+</body></html>

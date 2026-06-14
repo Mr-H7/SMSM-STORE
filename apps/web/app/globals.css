@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 6%;
+  --foreground: 43 23% 92%;
+  --card: 0 0% 10%;
+  --primary: 0 100% 40%;
+  --muted: 0 0% 14%;
+  --border: 0 100% 26%;
+  --input: 0 0% 16%;
+  --ring: 0 100% 38%;
+}
+
+* {
+  border-color: hsl(var(--border) / 0.2);
+}
+
+body {
+  background:
+    radial-gradient(circle at 95% -10%, rgba(205, 0, 0, 0.18), transparent 35%),
+    radial-gradient(circle at -20% 20%, rgba(255, 255, 255, 0.07), transparent 30%),
+    #0f0f0f;
+  color: hsl(var(--foreground));
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(205, 0, 0, 0.55);
+  color: #fff;
+}
+
+.smsm-container {
+  @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8;
+}
+
+.smsm-card {
+  @apply rounded-md border border-[#2d2d2d] bg-[#1a1a1a] transition duration-300;
+}
+
+.smsm-btn-primary {
+  @apply inline-flex items-center justify-center rounded-md border border-[#cd0000] bg-[#cd0000] px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-[#EFEDE6] transition duration-300 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0;
+}
+
+.smsm-btn-secondary {
+  @apply inline-flex items-center justify-center rounded-md border border-[#3a3a3a] bg-[#121212] px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-[#EFEDE6] transition duration-300 hover:-translate-y-0.5 hover:border-[#cd0000] active:translate-y-0;
+}
+
+.smsm-heading {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  @apply uppercase tracking-tight;
+}
+
+.smsm-label {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  @apply text-[11px] uppercase tracking-[0.2em] text-[#9d9d9d];
+}
+
+.smsm-section {
+  @apply py-12 md:py-16;
+}
+
+.smsm-panel {
+  @apply border border-[#2c2c2c] bg-[#131313] transition duration-300;
+}
+
+.smsm-input {
+  @apply w-full rounded-none border border-[#323232] bg-[#181818] px-3 py-3 text-sm text-[#efe6e6] placeholder:text-[#6f6f6f] transition duration-300 focus:border-[#cd0000] focus:outline-none;
+}
+
+.animate-page-in {
+  animation: page-in 520ms ease-out both;
+}
+
+.animate-section-in {
+  animation: section-in 700ms ease-out both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+[dir="rtl"] body {
+  font-family: "Cairo", "Inter", sans-serif;
+}
+
+[dir="rtl"] .smsm-heading {
+  letter-spacing: 0;
+  text-transform: none;
+}

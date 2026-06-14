@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#e6e3e2",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "tertiary-fixed": "#e5e2e1",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary-fixed": "#e4e2dc",
+                      "on-error": "#690005",
+                      "tertiary": "#c8c6c5",
+                      "on-surface": "#e5e2e1",
+                      "tertiary-container": "#666565",
+                      "surface-container": "#201f1f",
+                      "surface-dim": "#131313",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#313030",
+                      "on-primary": "#690000",
+                      "secondary-container": "#474742",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container-low": "#1c1b1b",
+                      "on-secondary-fixed": "#1b1c18",
+                      "on-primary-fixed-variant": "#930000",
+                      "on-error-container": "#ffdad6",
+                      "outline-variant": "#5e3f3a",
+                      "on-background": "#e5e2e1",
+                      "surface-variant": "#353534",
+                      "primary-container": "#cd0000",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "inverse-primary": "#c00000",
+                      "on-tertiary": "#313030",
+                      "inverse-surface": "#e5e2e1",
+                      "outline": "#ae8881",
+                      "on-primary-fixed": "#410000",
+                      "surface-tint": "#ffb4a8",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "primary-fixed": "#ffdad4",
+                      "on-primary-container": "#ffdbd5",
+                      "surface-bright": "#3a3939",
+                      "error": "#ffb4ab",
+                      "surface-container-highest": "#353534",
+                      "on-secondary": "#30312c",
+                      "secondary": "#c8c6c0",
+                      "primary": "#ffb4a8",
+                      "primary-fixed-dim": "#ffb4a8",
+                      "surface": "#131313",
+                      "secondary-fixed-dim": "#c8c6c0",
+                      "background": "#131313",
+                      "on-surface-variant": "#e8bdb6",
+                      "on-secondary-fixed-variant": "#474742",
+                      "on-secondary-container": "#b6b5af"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "stack-lg": "48px",
+                      "margin-mobile": "16px",
+                      "stack-sm": "8px",
+                      "stack-md": "24px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Space Grotesk"],
+                      "label-bold": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Space Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0F0F0F;
+            color: #EFEDE6;
+        }
+        .product-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="font-body-md bg-background text-on-surface">
+<!-- TopAppBar Section -->
+<nav class="bg-neutral-950 dark:bg-neutral-950 docked full-width top-0 border-b z-50 border-neutral-900 dark:border-neutral-800 flat no shadows sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-black text-neutral-50 dark:text-neutral-50 italic font-headline-xl" href="#">SMSM STORE</a>
+<div class="hidden md:flex gap-6">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">New Drops</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-red-600 border-b-2 border-red-600 pb-1" href="#">Collections</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">Limited</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-neutral-400 hover:text-neutral-50 transition-colors" href="#">Accessories</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-neutral-400 hover:bg-neutral-900 dark:hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 text-neutral-400 hover:bg-neutral-900 dark:hover:bg-neutral-900 hover:text-red-600 active:scale-95 duration-200 ease-in-out relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary-container text-white text-[10px] px-1 rounded-full">3</span>
+</button>
+<div class="hidden md:block h-6 w-[1px] bg-neutral-800 mx-2"></div>
+<button class="hidden md:flex font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-red-700 dark:text-red-600 items-center gap-2">
+                    Order WhatsApp
+                </button>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-6 py-12">
+<!-- Header & Toolbar -->
+<header class="mb-12">
+<h1 class="font-headline-xl text-neutral-50 mb-4">COLLECTIONS / المجموعات</h1>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-container-low p-4 border border-neutral-800">
+<p class="font-label-sm text-neutral-400 uppercase tracking-widest">Showing 24 of 148 Products</p>
+<div class="flex gap-4 w-full md:w-auto">
+<div class="relative flex-1 md:flex-none">
+<select class="w-full bg-neutral-900 border border-neutral-800 text-neutral-300 font-label-bold py-2 px-4 focus:ring-1 focus:ring-primary appearance-none pr-10">
+<option>SORT BY: NEWEST / الأحدث</option>
+<option>PRICE: LOW-HIGH / السعر: من الأقل</option>
+<option>PRICE: HIGH-LOW / السعر: من الأعلى</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2 text-neutral-500 pointer-events-none">expand_more</span>
+</div>
+<button class="md:hidden flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 text-neutral-300">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-bold uppercase">Filters</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex gap-12">
+<!-- Sidebar Filters -->
+<aside class="hidden md:block w-64 shrink-0 space-y-10">
+<div>
+<h3 class="font-label-bold text-neutral-50 mb-4 border-b border-neutral-900 pb-2">CATEGORIES / الفئات</h3>
+<ul class="space-y-3">
+<li class="flex items-center justify-between text-neutral-400 hover:text-primary transition-colors cursor-pointer group">
+<span class="font-label-sm uppercase tracking-wider">Basketball</span>
+<span class="text-[10px] border border-neutral-800 px-2 py-0.5 group-hover:border-primary">12</span>
+</li>
+<li class="flex items-center justify-between text-neutral-50 cursor-pointer">
+<span class="font-label-sm uppercase tracking-wider border-b border-primary">Lifestyle</span>
+<span class="text-[10px] bg-primary text-white px-2 py-0.5">48</span>
+</li>
+<li class="flex items-center justify-between text-neutral-400 hover:text-primary transition-colors cursor-pointer group">
+<span class="font-label-sm uppercase tracking-wider">Running</span>
+<span class="text-[10px] border border-neutral-800 px-2 py-0.5 group-hover:border-primary">24</span>
+</li>
+<li class="flex items-center justify-between text-neutral-400 hover:text-primary transition-colors cursor-pointer group">
+<span class="font-label-sm uppercase tracking-wider">Luxury Elite</span>
+<span class="text-[10px] border border-neutral-800 px-2 py-0.5 group-hover:border-primary">16</span>
+</li>
+</ul>
+</div>
+<div>
+<h3 class="font-label-bold text-neutral-50 mb-4 border-b border-neutral-900 pb-2">SIZE / المقاس</h3>
+<div class="grid grid-cols-4 gap-2">
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">38</button>
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">39</button>
+<button class="aspect-square border border-primary bg-primary-container text-white flex items-center justify-center text-xs">40</button>
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">41</button>
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">42</button>
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">43</button>
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">44</button>
+<button class="aspect-square border border-neutral-800 flex items-center justify-center text-xs hover:border-primary transition-all">45</button>
+</div>
+</div>
+<div>
+<h3 class="font-label-bold text-neutral-50 mb-4 border-b border-neutral-900 pb-2">PRICE / السعر</h3>
+<input class="w-full accent-primary h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer" type="range"/>
+<div class="flex justify-between mt-3 font-label-sm text-neutral-500">
+<span>500 EGP</span>
+<span>15000 EGP</span>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-neutral-50 text-neutral-950 font-label-bold py-3 uppercase tracking-tighter hover:bg-neutral-200 transition-colors">
+                        Apply Filters / تطبيق
+                    </button>
+</div>
+</aside>
+<!-- Product Grid -->
+<section class="flex-1">
+<div class="product-grid-container">
+<!-- Product Card 1 -->
+<div class="group border border-neutral-900 bg-surface-container hover:border-neutral-50 transition-all duration-300 flex flex-col relative">
+<div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
+<span class="bg-primary text-neutral-50 font-label-bold text-[10px] px-3 py-1 uppercase">Sale | خصم</span>
+<span class="bg-neutral-50 text-neutral-950 font-label-bold text-[10px] px-3 py-1 uppercase">Limited | محدود</span>
+</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img alt="Nike Air Force" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A studio product photograph of a sleek Nike Air Force sneaker in vibrant cherry red and black. The shoe is positioned at a 45-degree angle against a stark dark void background with sharp, surgical lighting that highlights its leather textures and mechanical details. The image captures a luxury boutique aesthetic with high contrast and no lifestyle models." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjLQk54TdyKnsVahDbEml7RZnmImuA8SU2_n5hOioxkL5_0G5J9ZYa7NZXz3uOmLlsG2hDBPTlWBz4h7GoRstF1M9xf1pYgfiYuXXCORPmi8z4dExz3KnWIKczQ-kiehnDowZiosQLBZMjeaQnX6o1hYHFhpV9w-4JAnldUb1AnUYLLjnvPTkQEarwlwvh3qG7ZmVcRa_NAnhhZz8ddxG4S3z9CCVD06KHvct5pWY82lfJwebhYvOUfEQIx9TEP6goGVxmYqgDEw"/>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-neutral-50">AIR MAX ELITE X</h3>
+<p class="text-primary font-bold">1,250 EGP</p>
+</div>
+<p class="font-label-sm text-neutral-500 mb-6 uppercase tracking-widest">Performance / أداء عالي</p>
+<div class="mt-auto space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary py-3 flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span class="font-label-bold uppercase">Add to Cart / أضف للسلة</span>
+</button>
+<button class="w-full border border-neutral-800 py-3 flex items-center justify-center gap-2 hover:bg-neutral-800 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="font-label-bold uppercase">WhatsApp Order / واتساب</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group border border-neutral-900 bg-surface-container hover:border-neutral-50 transition-all duration-300 flex flex-col relative">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-neutral-50 text-neutral-950 font-label-bold text-[10px] px-3 py-1 uppercase">New Drop / وصل حديثاً</span>
+</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img alt="Jordan Retro High" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Detailed studio shot of a classic Jordan Retro High sneaker in a monochromatic white and grey colorway. The lighting is moody and directional, creating deep shadows that emphasize the high-end materials and paneling. The shoe stands alone on a dark platform, reflecting a premium urban boutique atmosphere with red surgical accents in the UI framing the image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5dDvEsnhGxZ0Csz6-gIY8Gb-Tcg2fWr0v_d18Su4b3JCmeVCBr-2xBPCoGV7xxyrWH33hlEOHmXzWehldvbu06K64SD8xUtQnTG7sHODEyzIoHkzCfiAe8ZIFw4qcbwM4oc8YK-hS3KhsnCsloI1h0IFGBWuhXW6rk_7gYvRFt0oIdj8I_AHkOIBJQ6WAKZt7ctVqhNfJ1bAfL_phQwSkGQrZUqLfO3jm9fGoQx81qCsl3uT3XtTbyWejmPYar4RHtvRzaNxpfA"/>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-neutral-50">RETRO HIGH VINTAGE</h3>
+<p class="text-neutral-50 font-bold">4,800 EGP</p>
+</div>
+<p class="font-label-sm text-neutral-500 mb-6 uppercase tracking-widest">Heritage / تراث كلاسيكي</p>
+<div class="mt-auto space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary py-3 flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span class="font-label-bold uppercase">Add to Cart / أضف للسلة</span>
+</button>
+<button class="w-full border border-neutral-800 py-3 flex items-center justify-center gap-2 hover:bg-neutral-800 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="font-label-bold uppercase">WhatsApp Order / واتساب</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group border border-neutral-900 bg-surface-container hover:border-neutral-50 transition-all duration-300 flex flex-col relative">
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img alt="Nike Zoom Runner" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="A technical performance running shoe by Nike in neon lime and charcoal grey, showcased against a pitch-black background. The lighting is clinical and sharp, highlighting the woven mesh texture and the aerodynamic silhouette of the sneaker. The image is clean, free of human presence, focusing solely on the precision engineering of the footwear in a high-contrast luxury setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZI2Vj8ERocXgkDnVqh27MbNSXPg_VnN5mrDkJ0ZHGF1SELpyCHs63-E2_y5E9p7jTuUYOw-YCw8Gvse3MnhnCPF2PGH3PUbMX4_xcnbuq3dfj1Ucz3rEIRkhusa87Kf2y55jS3AEG-FyDuj9xdi6bo3xN9c7MWR0fId8oCFIJ4Clh5W2xJdioaJHHbhL98efv7lEzkgRHgKLfHi81-LyFi88xCVF2fwx8zCHmgmQa2aevjZmlJ3WKe14mYPOG6H3jUZwuh5eYaw"/>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-neutral-50">SPEED RUNNER Z</h3>
+<p class="text-neutral-50 font-bold">3,100 EGP</p>
+</div>
+<p class="font-label-sm text-neutral-500 mb-6 uppercase tracking-widest">Athletic / رياضي</p>
+<div class="mt-auto space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary py-3 flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span class="font-label-bold uppercase">Add to Cart / أضف للسلة</span>
+</button>
+<button class="w-full border border-neutral-800 py-3 flex items-center justify-center gap-2 hover:bg-neutral-800 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="font-label-bold uppercase">WhatsApp Order / واتساب</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group border border-neutral-900 bg-surface-container hover:border-neutral-50 transition-all duration-300 flex flex-col relative">
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-primary text-neutral-50 font-label-bold text-[10px] px-3 py-1 uppercase">Sale | خصم</span>
+</div>
+<div class="aspect-square overflow-hidden bg-neutral-900">
+<img alt="Casual Sneakers" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" data-alt="Luxury suede casual sneakers in earthy tan and beige tones, photographed in a high-end studio setting. The backdrop is dark and atmospheric, allowing the soft textures of the suede and the precision stitching to stand out. The lighting creates a subtle rim light around the silhouette, maintaining the mechanical and technical focus of the SMSM STORE brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjjNLeJXUFu9wA2zUUrVm5VZba6xF4kAV5qCKgMgSXca9wQV4BwEG15jvxEENLzvDq--R5Akw3dam0T8FyXwrWy2VUEIGJdRXnG5DvxanV8vyZYxnZtOOKmVVa8CVmzozkxdN45ruL9LXDaq3P-gsJW6oXneN7AZfItYYVLyMKRaH-9wmo8Say6wJcg_vmJ12BE9KMHQ2RqYXLxFkPEPSohYD_zJT5HnyBlsfndBjIbRJZBSC6I5a8wdvKD7OYnI8_oAOb6ARTdA"/>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-neutral-50">URBAN SUEDE LO</h3>
+<div class="text-right">
+<p class="text-neutral-500 line-through text-xs">2,800 EGP</p>
+<p class="text-primary font-bold">1,950 EGP</p>
+</div>
+</div>
+<p class="font-label-sm text-neutral-500 mb-6 uppercase tracking-widest">Casual / غير رسمي</p>
+<div class="mt-auto space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-full bg-primary py-3 flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+<span class="font-label-bold uppercase">Add to Cart / أضف للسلة</span>
+</button>
+<button class="w-full border border-neutral-800 py-3 flex items-center justify-center gap-2 hover:bg-neutral-800 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="font-label-bold uppercase">WhatsApp Order / واتساب</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex justify-center items-center gap-4">
+<button class="w-12 h-12 border border-neutral-800 flex items-center justify-center hover:bg-neutral-900 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-2">
+<button class="w-12 h-12 bg-primary text-neutral-50 font-bold">1</button>
+<button class="w-12 h-12 border border-neutral-800 text-neutral-400 hover:border-neutral-50 hover:text-neutral-50 transition-colors">2</button>
+<button class="w-12 h-12 border border-neutral-800 text-neutral-400 hover:border-neutral-50 hover:text-neutral-50 transition-colors">3</button>
+<span class="w-12 h-12 flex items-center justify-center text-neutral-600">...</span>
+<button class="w-12 h-12 border border-neutral-800 text-neutral-400 hover:border-neutral-50 hover:text-neutral-50 transition-colors">12</button>
+</div>
+<button class="w-12 h-12 border border-neutral-800 flex items-center justify-center hover:bg-neutral-900 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Section -->
+<footer class="bg-neutral-950 dark:bg-neutral-950 full-width border-t mt-auto border-neutral-900 dark:border-neutral-800 flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-16 max-w-7xl mx-auto">
+<div class="space-y-6">
+<h2 class="text-xl font-black text-neutral-50 dark:text-neutral-50 font-headline-md">SMSM STORE</h2>
+<p class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 leading-relaxed">
+                    © 2024 SMSM STORE. ENGINEERED FOR THE ELITE. <br/>
+                    CURATING THE FUTURE OF STREETWEAR PERFORMANCE.
+                </p>
+<div class="flex gap-4">
+<button class="text-neutral-500 hover:text-red-600 transition-colors">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button class="text-neutral-500 hover:text-red-600 transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-bold text-neutral-50 text-sm tracking-widest border-b border-neutral-900 pb-2">SHOP / تسوق</h4>
+<nav class="flex flex-col gap-2">
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Shipping Policy</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Size Guide</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Returns</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-bold text-neutral-50 text-sm tracking-widest border-b border-neutral-900 pb-2">CONNECT / تواصل</h4>
+<nav class="flex flex-col gap-2">
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Store Locator</a>
+<a class="font-['Space_Grotesk'] text-xs uppercase tracking-tighter text-neutral-500 hover:text-red-600 underline-offset-4 hover:underline transition-opacity duration-300" href="#">Contact Us</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-bold text-neutral-50 text-sm tracking-widest border-b border-neutral-900 pb-2">DROP ALERTS / تنبيهات</h4>
+<div class="relative">
+<input class="w-full bg-neutral-900 border border-neutral-800 px-4 py-3 text-xs font-label-bold text-neutral-300 focus:outline-none focus:border-red-600" placeholder="EMAIL ADDRESS" type="email"/>
+<button class="absolute right-2 top-2 text-red-600">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<p class="text-[10px] text-neutral-600 uppercase">Be the first to know about upcoming limited drops and exclusive collabs.</p>
+</div>
+</div>
+<div class="border-t border-neutral-900 py-6 text-center">
+<p class="font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em] text-neutral-700">HIGH-CONTRAST MINIMALISM / CAIRO - DUBAI - LONDON</p>
+</div>
+</footer>
+</body></html>
