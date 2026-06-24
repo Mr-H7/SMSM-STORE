@@ -1,7 +1,7 @@
 "use client";
 
-import Image, { ImageProps } from "next/image";
-import { useEffect, useState } from "react";
+import Image, { type ImageProps } from "next/image";
+import { useEffect, useState, type SyntheticEvent } from "react";
 
 type Props = Omit<ImageProps, "src" | "alt"> & {
   src: string;
@@ -21,7 +21,7 @@ export function ImageWithFallback({ src, fallbackSrc, alt, onError, ...props }: 
       {...props}
       src={currentSrc}
       alt={alt}
-      onError={(event) => {
+      onError={(event: SyntheticEvent<HTMLImageElement>) => {
         if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc);
         onError?.(event);
       }}
