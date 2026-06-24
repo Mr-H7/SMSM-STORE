@@ -1,14 +1,26 @@
+export const dynamic = "force-dynamic";
+
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { HeroProductShowcase } from "@/components/storefront/HeroProductShowcase";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { ReviewCard } from "@/components/storefront/ReviewCard";
 import { WhatsappButton } from "@/components/shared/WhatsappButton";
+import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
+import { NewsletterForm } from "@/components/storefront/NewsletterForm";
 import { reviews } from "@/lib/data/reviews";
-import { getPublicProducts } from "@/lib/supabase/queries";
+import { getPublicProducts } from "@/lib/system-api/queries";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { isLocale } from "@/lib/locale";
+import { localizedMetadata, storeJsonLd } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const resolved = await params;
+  if (!isLocale(resolved.locale)) return {};
+  return localizedMetadata(resolved.locale, "home");
+}
 
 export default async function HomePage({
   params
@@ -26,32 +38,9 @@ export default async function HomePage({
   const newArrivals = [...products]
     .sort((a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt)))
     .slice(0, 4);
-  const heroProduct = {
-    name: locale === "ar" ? "ايرفورس ابيض ميرور" : "Air Force White Mirror",
-    image: "/images/SHOES/AIR%20FORCE%20WHITE%20MIRROR%20MOLTEN%20METAL/FRONT.png"
-  };
-  const heroRotation = [
-    { name: "Air Max 97", image: "/images/SHOES/AIR%20MAX%2097/FRONT.png" },
-    { name: "New Balance 530", image: "/images/SHOES/NEW%20BALANCE%20530/FRONT.png" },
-    { name: "Balenciaga Track", image: "/images/SHOES/BALENCIAGA%20TRACK/FRONT.png" }
-  ];
-  const comingThisWeek = [
-    {
-      title: locale === "ar" ? "لقطات من المتجر" : "In-store proof",
-      image: "/images/smsm-store-hero.jpeg"
-    },
-    {
-      title: "Air Max 95",
-      image: "/images/SHOES/AIR%20MAX%2095/FRONT.png"
-    },
-    {
-      title: "TN 3",
-      image: "/images/SHOES/TN%203/FRONT.png"
-    }
-  ];
-
   return (
     <div className="animate-page-in pb-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(storeJsonLd(locale)) }} />
       <section className="relative overflow-hidden border-b border-[#232323] bg-[#050505]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_45%,rgba(205,0,0,0.32),transparent_34%),radial-gradient(circle_at_12%_15%,rgba(255,255,255,0.08),transparent_24%),linear-gradient(135deg,#050505_0%,#101010_48%,#050505_100%)]" />
         <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:72px_72px]" />
@@ -86,34 +75,7 @@ export default async function HomePage({
             </div>
           </div>
 
-          <div className="relative min-h-[420px] animate-section-in lg:min-h-[560px]">
-            <div className="absolute inset-x-10 bottom-10 h-24 rounded-full bg-[#cd0000]/25 blur-3xl" />
-            <div className="absolute left-1/2 top-8 h-[78%] w-[78%] -translate-x-1/2 rounded-full border border-[#cd0000]/25 bg-black/30 shadow-[0_0_90px_rgba(205,0,0,0.24)]" />
-            <Image
-              src={heroProduct.image}
-              alt={heroProduct.name}
-              fill
-              priority
-              sizes="(max-width: 1024px) 92vw, 52vw"
-              className="object-contain drop-shadow-[0_38px_52px_rgba(0,0,0,0.72)]"
-            />
-            <div className="absolute bottom-2 left-1/2 flex w-full max-w-md -translate-x-1/2 justify-center gap-3 px-4">
-              {heroRotation.map((item) => (
-                <div
-                  key={item.name}
-                  className="relative h-20 flex-1 overflow-hidden border border-[#282828] bg-black/70 backdrop-blur"
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    sizes="140px"
-                    className="object-contain p-2"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          <HeroProductShowcase products={products} locale={locale} />
         </div>
       </section>
 
@@ -129,8 +91,8 @@ export default async function HomePage({
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {bestSellers.map((product) => (
-              <ProductCard key={product.id} product={product} locale={locale} />
+            {bestSellers.map((product, index) => (
+              <ProductCard key={product.id} product={product} locale={locale} index={index} />
             ))}
           </div>
         </div>
@@ -156,7 +118,7 @@ export default async function HomePage({
           </div>
           <div className="relative min-h-[240px] w-full overflow-hidden rounded-md border border-[#2e2e2e]">
             <Image
-              src="/images/template.svg"
+              src="/images/store/promo-banner.png"
               alt="Promotional banner"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -169,8 +131,8 @@ export default async function HomePage({
       <section className="smsm-container smsm-section animate-section-in">
         <h2 className="smsm-heading mb-6 text-3xl font-bold">{dictionary.home.newArrivals}</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {newArrivals.map((product) => (
-            <ProductCard key={product.id} product={product} locale={locale} />
+          {newArrivals.map((product, index) => (
+            <ProductCard key={product.id} product={product} locale={locale} index={index} />
           ))}
         </div>
       </section>
@@ -182,7 +144,7 @@ export default async function HomePage({
             {[
               locale === "ar" ? "منتجات أصلية 100%" : "100% Authentic products",
               locale === "ar" ? "توصيل سريع وخدمة مباشرة" : "Fast delivery and concierge support",
-              locale === "ar" ? "مقاسات متعددة واختيارات حصرية" : "Wide sizing and exclusive curated drops"
+              locale === "ar" ? "منتجات بجودة وخامة عالية" : "High-quality products and materials"
             ].map((item) => (
               <div key={item} className="smsm-panel p-6 text-center text-sm text-[#d3d3d3]">
                 {item}
@@ -196,13 +158,13 @@ export default async function HomePage({
         <h2 className="smsm-heading mb-6 text-3xl font-bold">{dictionary.home.gallery}</h2>
         <div className="grid gap-4 md:grid-cols-3">
           <div className="smsm-panel relative h-60 w-full overflow-hidden">
-            <Image src="/images/template.svg" alt="Store display" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+            <ImageWithFallback src="/images/store/store-wall.jpeg" fallbackSrc="/images/store/store-front.jpeg" alt="Store display" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
           </div>
           <div className="smsm-panel relative h-60 w-full overflow-hidden">
-            <Image src="/images/template.svg" alt="Sneaker shelf" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+            <ImageWithFallback src="/images/store/sneaker-shelf.jpeg" fallbackSrc="/images/store/store-front.jpeg" alt="Sneaker shelf" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
           </div>
           <div className="smsm-panel relative h-60 w-full overflow-hidden">
-            <Image src="/images/template.svg" alt="Premium shoes wall" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+            <ImageWithFallback src="/images/store/premium-shoes-wall.jpeg" fallbackSrc="/images/store/store-front.jpeg" alt="Premium shoes wall" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -224,15 +186,8 @@ export default async function HomePage({
               ? "سجّل بريدك للحصول على تنبيهات الإصدارات والعروض الحصرية أولاً."
               : "Join the elite list for early access to limited drops and offers."}
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <input
-              className="w-full max-w-sm rounded-none border border-[#f5beb9]/40 bg-black/15 px-4 py-3 text-sm placeholder:text-[#f0d4d2]"
-              placeholder={locale === "ar" ? "البريد الإلكتروني" : "Email address"}
-            />
-            <button className="inline-flex items-center justify-center rounded-none bg-[#efe7df] px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-[#8c0000]">
-              {locale === "ar" ? "اشترك الآن" : "Sign Up Now"}
-              <ArrowRight className="ms-2 h-4 w-4" />
-            </button>
+          <div className="mx-auto mt-6 max-w-xl">
+            <NewsletterForm locale={locale} variant="red" buttonLabel={locale === "ar" ? "اشترك الآن" : "Sign Up Now"} />
           </div>
         </div>
       </section>

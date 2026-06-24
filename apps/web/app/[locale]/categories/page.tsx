@@ -1,5 +1,7 @@
+export const dynamic = "force-dynamic";
+
 import { CategoryCard } from "@/components/storefront/CategoryCard";
-import { getCategories } from "@/lib/supabase/queries";
+import { getCategories } from "@/lib/system-api/queries";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { isLocale } from "@/lib/locale";
 

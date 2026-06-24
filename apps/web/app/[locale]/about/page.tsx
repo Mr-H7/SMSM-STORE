@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { isLocale } from "@/lib/locale";
+import { localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const resolved = await params;
+  if (!isLocale(resolved.locale)) return {};
+  return localizedMetadata(resolved.locale, "about", "/about");
+}
 
 export default async function AboutPage({
   params
@@ -26,13 +34,14 @@ export default async function AboutPage({
               : "SMSM STORE started as a shoes-first concept focused on curated originals, premium execution, and practical ordering flow."}
           </p>
         </div>
-        <div className="smsm-panel relative min-h-[320px] overflow-hidden">
+        <div className="smsm-panel relative flex min-h-[320px] items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_center,rgba(205,0,0,0.2),transparent_48%),#090909]">
           <Image
-            src="/images/template.svg"
+            src="/images/smsm-logo.png"
             alt="About SMSM STORE"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
+            width={220}
+            height={220}
+            sizes="220px"
+            className="h-48 w-48 object-contain drop-shadow-[0_24px_50px_rgba(205,0,0,0.2)] md:h-56 md:w-56"
           />
         </div>
       </section>
@@ -50,14 +59,14 @@ export default async function AboutPage({
           <h3 className="smsm-heading text-xl">{locale === "ar" ? "الرسالة" : "Mission"}</h3>
           <p className="mt-3 text-sm text-[#c4c4c4]">
             {locale === "ar"
-              ? "توفير تجربة شراء مريحة مع جودة أصلية وخدمة سريعة."
-              : "Deliver a smooth shopping experience with authentic quality and rapid support."}
+              ? "جودة عالية"
+              : "High quality"}
           </p>
         </div>
         <div className="smsm-panel p-5">
           <h3 className="smsm-heading text-xl">{locale === "ar" ? "القيم" : "Values"}</h3>
           <p className="mt-3 text-sm text-[#c4c4c4]">
-            {locale === "ar" ? "الأصالة، الدقة، وسرعة الاستجابة." : "Authenticity, precision, and responsiveness."}
+            {locale === "ar" ? "التنوع" : "Variety"}
           </p>
         </div>
       </section>

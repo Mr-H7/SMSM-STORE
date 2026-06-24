@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { useCart } from "@/components/shared/CartProvider";
 import { WhatsappButton } from "@/components/shared/WhatsappButton";
 import { getDictionary } from "@/lib/i18n/dictionary";
+import { getProductBadgeLabel } from "@/lib/product-display";
 import { Locale, Product } from "@/lib/types";
 import { formatPriceEGP } from "@/lib/utils";
 import { buildProductWhatsappUrl } from "@/lib/whatsapp";
@@ -17,21 +18,49 @@ export function ProductDetailsClient({ locale, product, related }: { locale: Loc
   const [size, setSize] = useState(product.sizes[0] ?? "");
   const [color, setColor] = useState(product.colors[0] ?? "");
   const [quantity, setQuantity] = useState(1);
-  const [activeImage, setActiveImage] = useState(product.images[0] ?? "/images/template.svg");
+  const galleryImages = useMemo(() => {
+    const unique = Array.from(new Set(product.images.filter(Boolean)));
+    const productImages = unique.filter((image) => image !== "/images/smsm-logo.png");
+    return productImages.length ? productImages : ["/images/smsm-logo.png"];
+  }, [product.images]);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [galleryPaused, setGalleryPaused] = useState(false);
+  const activeImage = galleryImages[activeImageIndex] ?? galleryImages[0] ?? "/images/smsm-logo.png";
   const inStock = product.stock > 0 && product.status !== "out-of-stock";
+  const lowStock = inStock && product.stock <= 3;
   const safeQuantity = Math.min(quantity, Math.max(product.stock, 1));
+  const stockLabel = !inStock
+    ? locale === "ar" ? "غير متوفر" : "Out Of Stock"
+    : lowStock
+      ? locale === "ar" ? "مخزون منخفض" : "Low Stock"
+      : locale === "ar" ? "متوفر" : "In Stock";
+  const badge = lowStock
+    ? locale === "ar" ? "مخزون منخفض" : "Low Stock"
+    : getProductBadgeLabel(product.badge, locale);
+
+  useEffect(() => {
+    setActiveImageIndex(0);
+  }, [product.id]);
+
+  useEffect(() => {
+    if (galleryImages.length < 2 || galleryPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setActiveImageIndex((current) => (current + 1) % galleryImages.length);
+    }, 3600);
+    return () => window.clearInterval(timer);
+  }, [galleryImages.length, galleryPaused]);
 
   return (
     <div className="smsm-container animate-page-in space-y-10 py-8">
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-        <section className="space-y-4">
+        <section className="space-y-4" onMouseEnter={() => setGalleryPaused(true)} onMouseLeave={() => setGalleryPaused(false)}>
           <div className="smsm-panel relative min-h-[420px] overflow-hidden">
-            <Image src={activeImage} alt={product.nameEn} fill sizes="(max-width: 1024px) 100vw, 60vw" className="object-cover transition duration-500 hover:scale-105" />
+            <Image key={activeImage} src={activeImage} alt={product.nameEn} fill priority quality={82} sizes="(max-width: 1024px) 100vw, 58vw" className="animate-gallery-image object-contain transition duration-500 hover:scale-105" />
           </div>
           <div className="grid grid-cols-4 gap-3">
-            {product.images.map((image, idx) => (
-              <button key={`${image}-${idx}`} onClick={() => setActiveImage(image)} className={`relative h-24 overflow-hidden border transition ${activeImage === image ? "border-[#cd0000]" : "border-[#323232] hover:border-[#9f9f9f]"}`}>
-                <Image src={image} alt={`${product.nameEn} ${idx + 1}`} fill sizes="(max-width: 1024px) 25vw, 10vw" className="object-cover" />
+            {galleryImages.map((image, idx) => (
+              <button key={image} onClick={() => setActiveImageIndex(idx)} className={`relative h-24 overflow-hidden border transition ${activeImageIndex === idx ? "border-[#cd0000]" : "border-[#323232] hover:border-[#9f9f9f]"}`}>
+                <Image src={image} alt={`${product.nameEn} ${idx + 1}`} fill loading="lazy" quality={55} sizes="(max-width: 1024px) 25vw, 10vw" className="object-contain" />
               </button>
             ))}
           </div>
@@ -39,8 +68,7 @@ export function ProductDetailsClient({ locale, product, related }: { locale: Loc
 
         <section className="smsm-panel space-y-5 p-6">
           <div className="flex items-center justify-between">
-            <span className="smsm-label text-[#cd0000]">{product.badge ?? product.brand}</span>
-            <span className="smsm-label">{product.model}</span>
+            {badge ? <span className="smsm-label text-[#cd0000]">{badge}</span> : <span />}
           </div>
           <h1 className="smsm-heading text-4xl font-extrabold">{locale === "ar" ? product.nameAr : product.nameEn}</h1>
           <p className="text-sm leading-7 text-[#bcbcbc]">
@@ -49,7 +77,7 @@ export function ProductDetailsClient({ locale, product, related }: { locale: Loc
           <div className="text-3xl font-bold text-[#efe6dc]">{formatPriceEGP(product.price, locale)}</div>
 
           <div>
-            <p className="smsm-label mb-2">{locale === "ar" ? "اختر المقاس" : "Select Size"}</p>
+            <p className="smsm-label mb-2">{locale === "ar" ? "مقاسك كام؟" : "Select Size"}</p>
             <div className="grid grid-cols-4 gap-2">
               {product.sizes.map((option) => (
                 <button key={option} onClick={() => setSize(option)} disabled={!inStock} className={`h-11 border text-sm transition disabled:cursor-not-allowed disabled:opacity-40 ${size === option ? "border-[#cd0000] bg-[#cd0000]/20" : "border-[#323232] bg-[#141414] hover:border-[#777]"}`}>
@@ -77,8 +105,8 @@ export function ProductDetailsClient({ locale, product, related }: { locale: Loc
               <p className="smsm-label mb-2">{locale === "ar" ? "الكمية" : "Quantity"}</p>
               <input type="number" min={1} max={Math.max(product.stock, 1)} value={quantity} disabled={!inStock} onChange={(event) => setQuantity(Math.min(Math.max(1, Number(event.target.value)), Math.max(product.stock, 1)))} className="smsm-input w-24 disabled:cursor-not-allowed disabled:opacity-50" />
             </div>
-            <p className={`text-sm font-semibold ${inStock ? "text-green-400" : "text-red-300"}`}>
-              {inStock ? (locale === "ar" ? `متوفر - ${product.stock} قطعة جاهزة للشحن` : `In stock - ${product.stock} ready to ship`) : locale === "ar" ? "غير متوفر" : "Out of stock"}
+            <p className={`text-sm font-semibold ${lowStock ? "text-[#ffb4a8]" : inStock ? "text-green-400" : "text-red-300"}`}>
+              {stockLabel}
             </p>
           </div>
 
@@ -97,8 +125,7 @@ export function ProductDetailsClient({ locale, product, related }: { locale: Loc
         <div>
           <h2 className="smsm-heading text-2xl font-bold">{locale === "ar" ? "المواصفات" : "Specs"}</h2>
           <div className="mt-4 divide-y divide-[#2b2b2b] border border-[#2b2b2b]">
-            <div className="flex justify-between p-3 text-sm"><span>{locale === "ar" ? "البراند" : "Brand"}</span><span>{product.brand}</span></div>
-            <div className="flex justify-between p-3 text-sm"><span>{locale === "ar" ? "الموديل" : "Model"}</span><span>{product.model}</span></div>
+            <div className="flex justify-between p-3 text-sm"><span>{locale === "ar" ? "الموديل" : "Model"}</span><span>{locale === "ar" ? product.nameAr : product.nameEn}</span></div>
             <div className="flex justify-between p-3 text-sm"><span>SKU</span><span>{product.sku ?? "-"}</span></div>
             <div className="flex justify-between p-3 text-sm"><span>{locale === "ar" ? "الجودة" : "Grade"}</span><span>{product.qualityGrade ?? "MIRROR"}</span></div>
             <div className="flex justify-between p-3 text-sm"><span>{locale === "ar" ? "المقاسات" : "Sizes"}</span><span>{product.sizes.join(" / ")}</span></div>
@@ -112,7 +139,7 @@ export function ProductDetailsClient({ locale, product, related }: { locale: Loc
           <Link href={`/${locale}/products`} className="smsm-btn-secondary text-xs">{locale === "ar" ? "عرض الكل" : "View Collections"}</Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {related.map((item) => <ProductCard key={item.id} product={item} locale={locale} />)}
+          {related.map((item, index) => <ProductCard key={item.id} product={item} locale={locale} index={index} />)}
         </div>
       </section>
     </div>

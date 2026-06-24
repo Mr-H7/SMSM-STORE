@@ -152,6 +152,7 @@ export type ProductPayload = {
   sizes: string[];
   colors: string[];
   images: string[];
+  badge: string | null;
   featured: boolean;
   on_offer: boolean;
   best_seller: boolean;
@@ -164,12 +165,16 @@ export function validateProductPayload(formData: FormData, categoryId: string | 
   const oldPrice = parseNonNegativeInt(formData.get("oldPrice"));
   const stock = parseNonNegativeInt(formData.get("stock"), 100000);
   const status = String(formData.get("status") ?? "active");
+  const badge = String(formData.get("badge") ?? "").toUpperCase();
 
   if (id && !isUuid(id)) return { ok: false, message: "Invalid product id." };
   if (!isValidSlug(slug)) return { ok: false, message: "Invalid product slug." };
   if (sellPrice === null || sellPrice <= 0) return { ok: false, message: "Sell price must be a positive integer." };
   if (stock === null) return { ok: false, message: "Stock must be a non-negative integer." };
   if (!isProductStatus(status)) return { ok: false, message: "Invalid product status." };
+  if (badge && !["NEW", "BESTSELLER", "LIMITED", "OFFER"].includes(badge)) {
+    return { ok: false, message: "Invalid product badge." };
+  }
 
   const sizes = String(formData.get("sizes") ?? "")
     .split(",")
@@ -209,7 +214,8 @@ export function validateProductPayload(formData: FormData, categoryId: string | 
       status,
       sizes,
       colors,
-      images: images.length ? images : ["/images/template.svg"],
+      images: images.length ? images : ["/images/smsm-logo.png"],
+      badge: badge || null,
       featured: formData.get("featured") === "on",
       on_offer: formData.get("onOffer") === "on",
       best_seller: formData.get("bestSeller") === "on"
@@ -240,7 +246,7 @@ export function validateCategoryPayload(formData: FormData): { ok: true; value: 
       name_ar: clampText(formData.get("nameAr"), LIMITS.name),
       name_en: clampText(formData.get("nameEn"), LIMITS.name),
       slug,
-      image_url: clampText(formData.get("image"), LIMITS.imageUrl) || "/images/template.svg",
+      image_url: clampText(formData.get("image"), LIMITS.imageUrl) || "/images/smsm-logo.png",
       is_active: formData.get("isActive") === "on"
     }
   };

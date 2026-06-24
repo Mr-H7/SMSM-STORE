@@ -1,8 +1,9 @@
 import { Product } from "@/lib/types";
 import { resolveProductImages } from "@/lib/data/product-images";
+import { getProductPrice, getPublicNames } from "@/lib/product-display";
 
 const defaultSizes = ["40", "41", "42", "43", "45"];
-const image = "/images/template.svg";
+const image = "/images/smsm-logo.png";
 
 type SeedProduct = {
   sku: string;
@@ -35,33 +36,38 @@ const categoryAr: Record<string, string> = {
 };
 
 const makeProduct = (index: number, item: SeedProduct): Product => {
-  const lowStock = item.stock <= 3;
-  const badge = lowStock ? "LOW STOCK" : item.badge;
   const qualityGrade = "MIRROR";
   const shortDescriptionAr = `${item.modelAr} من ${item.brand} بجودة ${qualityGrade} وسعر بيع واضح.`;
   const shortDescriptionEn = `${item.brand} ${item.modelEn} in ${qualityGrade} grade with clear sell-only pricing.`;
+
+  const names = getPublicNames({
+    slug: item.slug,
+    nameAr: `${item.modelAr} - ${item.brand}`,
+    nameEn: `${item.brand} ${item.modelEn}`,
+    brand: item.brand
+  });
 
   return {
     id: `00000000-0000-4000-8000-${String(index).padStart(12, "0")}`,
     sku: item.sku,
     model: item.modelAr,
     brand: item.brand,
-    nameAr: `${item.modelAr} - ${item.brand}`,
-    nameEn: `${item.brand} ${item.modelEn}`,
+    nameAr: names.nameAr,
+    nameEn: names.nameEn,
     slug: item.slug,
     shortDescriptionAr,
     shortDescriptionEn,
     descriptionAr: `${shortDescriptionAr} اختيار مناسب لعشاق السنيكرز من SMSM STORE، بتفاصيل Premium ومقاسات ${defaultSizes.join(" / ")}. التصنيف: ${categoryAr[item.category] ?? "سنيكرز"}.`,
     descriptionEn: `${shortDescriptionEn} A premium SMSM STORE sneaker pick with clean styling, daily comfort, and sizes ${defaultSizes.join(" / ")}. Category: ${item.category.replace(/-/g, " ")}.`,
     qualityGrade,
-    price: item.price,
+    price: getProductPrice(item.slug, item.price),
     oldPrice: item.oldPrice,
     category: item.category,
     sizes: defaultSizes,
     colors: item.colors,
     stock: item.stock,
     status: item.stock > 0 ? "active" : "out-of-stock",
-    badge,
+    badge: item.badge,
     featured: item.featured ?? index <= 10,
     onOffer: item.onOffer ?? false,
     images: resolveProductImages(item, [image, image]),

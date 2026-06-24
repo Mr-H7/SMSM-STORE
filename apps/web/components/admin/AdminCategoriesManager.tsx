@@ -13,12 +13,12 @@ export function AdminCategoriesManager({ initialCategories, products }: { initia
   const dictionary = getDictionary(locale);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
   const [editing, setEditing] = useState<Category | null>(null);
-  const [form, setForm] = useState({ nameAr: "", nameEn: "", slug: "", image: "/images/template.svg", isActive: true });
+  const [form, setForm] = useState({ nameAr: "", nameEn: "", slug: "", image: "/images/smsm-logo.png", isActive: true });
   const productCounts = useMemo(() => Object.fromEntries(categories.map((category) => [category.slug, products.filter((product) => product.category === category.slug).length])), [categories, products]);
 
   const reset = () => {
     setEditing(null);
-    setForm({ nameAr: "", nameEn: "", slug: "", image: "/images/template.svg", isActive: true });
+    setForm({ nameAr: "", nameEn: "", slug: "", image: "/images/smsm-logo.png", isActive: true });
   };
 
   const save = async (event: FormEvent) => {
@@ -71,7 +71,7 @@ export function AdminCategoriesManager({ initialCategories, products }: { initia
         <input required className="smsm-input" value={form.nameAr} onChange={(event) => setForm({ ...form, nameAr: event.target.value })} placeholder={locale === "ar" ? "الاسم العربي" : "Arabic name"} />
         <input required className="smsm-input" value={form.nameEn} onChange={(event) => setForm({ ...form, nameEn: event.target.value })} placeholder={locale === "ar" ? "الاسم الإنجليزي" : "English name"} />
         <input required className="smsm-input" value={form.slug} onChange={(event) => setForm({ ...form, slug: event.target.value })} placeholder="slug" />
-        <input required className="smsm-input" value={form.image} onChange={(event) => setForm({ ...form, image: event.target.value })} placeholder="/images/template.svg" />
+        <input required className="smsm-input" value={form.image} onChange={(event) => setForm({ ...form, image: event.target.value })} placeholder="/images/smsm-logo.png" />
         <input
           type="file"
           className="smsm-input"

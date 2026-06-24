@@ -118,3 +118,55 @@ where sku not in (
   'SMSM-MIR-NB530-021','SMSM-MIR-NB2000-022','SMSM-MIR-NB9060-023','SMSM-MIR-SHX-024','SMSM-MIR-SHXS-025',
   'SMSM-MIR-VM-026','SMSM-MIR-TN1-027','SMSM-MIR-TN3-028','SMSM-MIR-TSB-029','SMSM-MIR-ADISTAR-030'
 );
+
+update products
+set sell_price = case slug
+    when 'adidas-adistar-mirror' then 1550
+    when 'nike-travis-sb-mirror' then 1500
+    when 'nike-tn-3-mirror' then 1600
+    when 'nike-tn-1-mirror' then 1500
+    when 'nike-vm-sneaker-mirror' then 1800
+    when 'nike-shox-supreme-mirror' then 1600
+    when 'nike-shox-mirror' then 1600
+    when 'new-balance-530-mirror' then 1500
+    when 'new-balance-2000-mirror' then 1800
+    when 'new-balance-9060-mirror' then 1600
+    when 'louis-vuitton-skate-sneaker' then 2200
+    when 'louis-vuitton-trainer-sneaker' then 2200
+    when 'jordan-13-mirror' then 1750
+    when 'jordan-11-mirror' then 1500
+    when 'jordan-4-mirror' then 1500
+    when 'dior-b22-mirror' then 2200
+    when 'asics-runner-mirror' then 1700
+    when 'nike-air-force-black-red-mirror' then 1500
+    when 'nike-air-force-white-limited-mirror' then 1500
+    else sell_price
+  end,
+  badge = case when badge = 'LOW STOCK' then 'LIMITED' else badge end,
+  name_ar = model,
+  name_en = case slug
+    when 'adidas-adizero-mirror' then 'Adizero'
+    when 'adidas-adistar-mirror' then 'Adistar'
+    when 'asics-runner-mirror' then 'Asics'
+    when 'dior-b22-mirror' then 'B22'
+    when 'louis-vuitton-skate-sneaker' then 'LV Skate'
+    when 'louis-vuitton-trainer-sneaker' then 'LV Trainer'
+    when 'new-balance-530-mirror' then 'NB 530'
+    when 'new-balance-2000-mirror' then 'NB 2000'
+    when 'new-balance-9060-mirror' then 'NB 9060'
+    when 'nike-vm-sneaker-mirror' then 'VM'
+    when 'nike-shox-mirror' then 'Shox'
+    when 'nike-shox-supreme-mirror' then 'Shox Supreme'
+    when 'nike-tn-1-mirror' then 'TN1'
+    when 'nike-tn-3-mirror' then 'TN3'
+    else regexp_replace(name_en, '^' || brand || ' ', '', 'i')
+  end,
+  updated_at = now()
+where sku in (
+  'SMSM-MIR-ADZ-001','SMSM-MIR-AFBR-002','SMSM-MIR-AFWL-003','SMSM-MIR-AFWM-004','SMSM-MIR-AM95C-005',
+  'SMSM-MIR-AM95W-006','SMSM-MIR-AM95S-007','SMSM-MIR-AM97-008','SMSM-MIR-AM720-009','SMSM-MIR-AM2021-010',
+  'SMSM-MIR-AMQ-011','SMSM-MIR-ASX-012','SMSM-MIR-B22-013','SMSM-MIR-BTRK-014','SMSM-MIR-BAPE-015',
+  'SMSM-MIR-J4-016','SMSM-MIR-J11-017','SMSM-MIR-J13-018','SMSM-MIR-LVSK-019','SMSM-MIR-LVTR-020',
+  'SMSM-MIR-NB530-021','SMSM-MIR-NB2000-022','SMSM-MIR-NB9060-023','SMSM-MIR-SHX-024','SMSM-MIR-SHXS-025',
+  'SMSM-MIR-VM-026','SMSM-MIR-TN1-027','SMSM-MIR-TN3-028','SMSM-MIR-TSB-029','SMSM-MIR-ADISTAR-030'
+);

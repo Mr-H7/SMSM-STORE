@@ -3,7 +3,7 @@ import { Locale } from "@/lib/types";
 const shared = {
   storeName: "SMSM STORE",
   tagline: "BEST SHOES STORE",
-  whatsapp: "+20 11 52333633"
+  whatsapp: "+20 15 59978355"
 };
 
 export const dictionaries = {

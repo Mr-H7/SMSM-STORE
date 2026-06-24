@@ -73,7 +73,7 @@ export function AdminDashboardView({ products, orders, messages }: Props) {
               {products.filter((product) => product.bestSeller).slice(0, 3).map((product) => (
                 <div key={product.id} className="flex items-center gap-3 border border-[#2c2c2c] p-2">
                   <Image
-                    src={product.images[0] ?? "/images/template.svg"}
+                    src={product.images[0] ?? "/images/smsm-logo.png"}
                     alt={locale === "ar" ? product.nameAr : product.nameEn}
                     width={64}
                     height={56}

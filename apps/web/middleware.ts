@@ -1,27 +1,30 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const ADMIN_COOKIE = "smsm_admin_access_token";
+function shouldRedirectToHttps(request: NextRequest) {
+  if (process.env.NODE_ENV !== "production") return false;
+  const host = request.headers.get("host") ?? "";
+  if (host.startsWith("localhost") || host.startsWith("127.0.0.1") || host.startsWith("[::1]")) return false;
+  const proto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim().toLowerCase();
+  return proto === "http" || request.nextUrl.protocol === "http:";
+}
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const token = request.cookies.get(ADMIN_COOKIE)?.value;
-
-  if (pathname === "/admin") {
-    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+  if (request.headers.has("x-middleware-subrequest")) {
+    return new NextResponse(null, { status: 400 });
   }
 
-  if (pathname === "/admin/login" && token) {
-    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+  if (shouldRedirectToHttps(request)) {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    return NextResponse.redirect(url, 308);
   }
 
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login" && !token) {
-    return NextResponse.redirect(new URL("/admin/login", request.url));
-  }
-
-  return NextResponse.next();
+  const base = process.env.SYSTEM_APP_URL?.trim() || "http://localhost:3000";
+  const destination = new URL(request.nextUrl.pathname === "/admin/login" ? "/login" : "/dashboard", base);
+  return NextResponse.redirect(destination);
 }
 
 export const config = {
-  matcher: ["/admin/:path*"]
+  matcher: ["/admin/:path*"],
 };

@@ -2,16 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useParams } from "next/navigation";
+import { useRef, useState } from "react";
 import { useCart } from "@/components/shared/CartProvider";
-import { createCheckoutOrderAction } from "@/lib/supabase/actions";
+import { createCheckoutOrderAction } from "@/lib/system-api/actions";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { isLocale } from "@/lib/locale";
 import { formatPriceEGP } from "@/lib/utils";
 import { buildCartWhatsappUrl } from "@/lib/whatsapp";
 
-export default function CartPage({ params }: { params: any }) {
-  const locale = isLocale(params?.locale) ? params.locale : "ar";
+export default function CartPage() {
+  const params = useParams<{ locale: string }>();
+  const localeParam = params?.locale ?? "";
+  const locale = isLocale(localeParam) ? localeParam : "ar";
   const dictionary = getDictionary(locale);
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart();
   const [name, setName] = useState("");
@@ -20,8 +23,8 @@ export default function CartPage({ params }: { params: any }) {
   const [notes, setNotes] = useState("");
   const [checkoutError, setCheckoutError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const checkoutAttemptRef = useRef<string | null>(null);
 
-  const checkoutHref = useMemo(() => buildCartWhatsappUrl(locale, items, { name, phone, address, notes }), [locale, items, name, phone, address, notes]);
   const canCheckout = Boolean(items.length && name.trim() && phone.trim() && address.trim());
 
   if (items.length === 0) {
@@ -51,7 +54,7 @@ export default function CartPage({ params }: { params: any }) {
             <article key={`${item.productId}-${item.size}-${item.color}`} className="smsm-panel p-5 transition duration-300 hover:border-[#4a4a4a]">
               <div className="flex flex-col gap-4 sm:flex-row">
                 <div className="relative h-32 w-full overflow-hidden rounded-md border border-[#2f2f2f] sm:w-44">
-                  <Image src={item.image} alt={item.nameEn} fill sizes="(max-width: 640px) 100vw, 176px" className="object-cover" />
+                  <Image src={item.image} alt={item.nameEn} fill quality={65} sizes="(max-width: 640px) 100vw, 176px" className="object-contain" />
                 </div>
                 <div className="flex-1">
                   <h3 className="smsm-heading text-3xl font-semibold">{locale === "ar" ? item.nameAr : item.nameEn}</h3>
@@ -103,12 +106,25 @@ export default function CartPage({ params }: { params: any }) {
             onClick={async () => {
               setSubmitting(true);
               setCheckoutError("");
-              const result = await createCheckoutOrderAction({ name, phone, address, notes }, items, locale);
+              checkoutAttemptRef.current ??= crypto.randomUUID();
+              const result = await createCheckoutOrderAction(
+                { name, phone, address, notes },
+                items,
+                locale,
+                checkoutAttemptRef.current
+              );
               setSubmitting(false);
               if (!result.ok) {
                 setCheckoutError(result.message);
                 return;
               }
+              const checkoutHref = buildCartWhatsappUrl(
+                locale,
+                items,
+                { name, phone, address, notes },
+                result.order.orderNumber
+              );
+              checkoutAttemptRef.current = null;
               clearCart();
               window.open(checkoutHref, "_blank", "noopener,noreferrer");
             }}

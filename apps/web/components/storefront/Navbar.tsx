@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, Search, ShoppingCart, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Dictionary } from "@/lib/i18n/dictionary";
 import { Locale } from "@/lib/types";
 import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
@@ -17,25 +18,35 @@ type Props = {
 
 export function Navbar({ locale, dictionary }: Props) {
   const [open, setOpen] = useState(false);
-  const [pathname, setPathname] = useState("");
+  const pathname = usePathname();
+  const menuId = useId();
   const { totalItems } = useCart();
 
-  useEffect(() => {
-    setPathname(window.location.pathname);
-  }, []);
-
   const links = [
-    { href: `/${locale}`, label: dictionary.nav.home },
-    { href: `/${locale}/products`, label: dictionary.nav.products },
-    { href: `/${locale}/offers`, label: dictionary.nav.offers },
-    { href: `/${locale}/about`, label: dictionary.nav.about },
-    { href: `/${locale}/contact`, label: dictionary.nav.contact }
+    { href: "/" + locale, label: dictionary.nav.home },
+    { href: "/" + locale + "/products", label: dictionary.nav.products },
+    { href: "/" + locale + "/offers", label: dictionary.nav.offers },
+    { href: "/" + locale + "/about", label: dictionary.nav.about },
+    { href: "/" + locale + "/contact", label: dictionary.nav.contact }
   ];
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#222] bg-[#060606]/95 backdrop-blur-md">
       <div className="smsm-container flex h-16 items-center justify-between gap-3 lg:h-[74px]">
-        <Link href={`/${locale}`} className="flex items-center gap-3 transition duration-300 hover:opacity-90">
+        <Link href={"/" + locale} className="flex min-w-0 items-center gap-3 transition duration-300 hover:opacity-90">
           <Image
             src="/images/smsm-logo.png"
             alt="SMSM STORE"
@@ -57,24 +68,25 @@ export function Navbar({ locale, dictionary }: Props) {
             <Link
               key={link.href}
               href={link.href}
-              className={`smsm-heading text-[12px] font-semibold tracking-[0.12em] transition duration-300 hover:-translate-y-0.5 ${
+              className={"smsm-heading text-[12px] font-semibold tracking-[0.12em] transition duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cd0000] " + (
                 pathname === link.href
                   ? "border-b border-[#cd0000] pb-1 text-[#cd0000]"
                   : "text-[#c3c3c3] hover:text-[#f0ece4]"
-              }`}
+              )}
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <button className="text-[#9b9b9b] transition duration-300 hover:-translate-y-0.5 hover:text-[#f3efe8]">
+        <div className="hidden items-center gap-3 lg:flex">
+          <button className="text-[#9b9b9b] transition duration-300 hover:-translate-y-0.5 hover:text-[#f3efe8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cd0000]" aria-label={locale === "ar" ? "بحث" : "Search"}>
             <Search className="h-4 w-4" />
           </button>
           <Link
-            href={`/${locale}/cart`}
-            className="relative text-[#9b9b9b] transition duration-300 hover:-translate-y-0.5 hover:text-[#f3efe8]"
+            href={"/" + locale + "/cart"}
+            className="relative text-[#9b9b9b] transition duration-300 hover:-translate-y-0.5 hover:text-[#f3efe8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cd0000]"
+            aria-label={dictionary.nav.cart}
           >
             <ShoppingCart className="h-4 w-4" />
             {totalItems > 0 && (
@@ -85,45 +97,56 @@ export function Navbar({ locale, dictionary }: Props) {
           </Link>
           <LanguageSwitcher locale={locale} label={dictionary.actions.language} />
           <WhatsappButton
-            href={`https://wa.me/${dictionary.whatsapp.replace(/\D/g, "")}`}
+            href={"https://wa.me/" + dictionary.whatsapp.replace(/\D/g, "")}
             label={dictionary.actions.orderWhatsapp}
             primary
           />
         </div>
 
         <button
-          className="rounded border border-[#2c2c2c] p-2 md:hidden"
+          className="rounded border border-[#2c2c2c] p-2 text-[#f3efe8] transition hover:border-[#cd0000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cd0000] lg:hidden"
           onClick={() => setOpen((prev) => !prev)}
-          aria-label="menu"
+          aria-label={open ? (locale === "ar" ? "إغلاق القائمة" : "Close menu") : (locale === "ar" ? "فتح القائمة" : "Open menu")}
+          aria-expanded={open}
+          aria-controls={menuId}
+          type="button"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {open && (
-        <div className="animate-section-in border-t border-[#2d2d2d] bg-[#090909] md:hidden">
-          <div className="smsm-container flex flex-col gap-4 py-4">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`smsm-heading text-[12px] tracking-[0.12em] ${
-                  pathname === link.href ? "text-[#cd0000]" : "text-[#f0ece4]"
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="flex items-center gap-3">
-              <LanguageSwitcher locale={locale} label={dictionary.actions.language} />
-              <Link href={`/${locale}/cart`} className="smsm-btn-secondary">
-                {dictionary.nav.cart} ({totalItems})
-              </Link>
-            </div>
+      <div
+        id={menuId}
+        className={"overflow-hidden border-t border-[#2d2d2d] bg-[#090909] transition-[max-height,opacity,transform] duration-300 lg:hidden " + (
+          open ? "max-h-[560px] translate-y-0 opacity-100" : "max-h-0 -translate-y-2 opacity-0"
+        )}
+      >
+        <div className="smsm-container flex flex-col gap-4 py-4">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={"smsm-heading rounded-sm px-1 py-2 text-[12px] tracking-[0.12em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cd0000] " + (
+                pathname === link.href ? "text-[#cd0000]" : "text-[#f0ece4]"
+              )}
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div className="grid gap-3 border-t border-[#252525] pt-4 sm:grid-cols-2">
+            <LanguageSwitcher locale={locale} label={dictionary.actions.language} />
+            <Link href={"/" + locale + "/cart"} className="smsm-btn-secondary text-center" onClick={() => setOpen(false)}>
+              {dictionary.nav.cart} ({totalItems})
+            </Link>
+            <WhatsappButton
+              href={"https://wa.me/" + dictionary.whatsapp.replace(/\D/g, "")}
+              label={dictionary.actions.orderWhatsapp}
+              primary
+            />
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

@@ -30,7 +30,7 @@ export function ProductCatalogClient({
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const categoryQuery = searchParams.get("category");
-    if (categoryQuery) setCategory(categoryQuery);
+    if (/^[a-z0-9-]{1,80}$/.test(categoryQuery ?? "")) setCategory(categoryQuery!);
   }, []);
 
   const allSizes = useMemo(() => Array.from(new Set(products.flatMap((product) => product.sizes))), [products]);
@@ -106,10 +106,10 @@ export function ProductCatalogClient({
             <ProductSkeleton /><ProductSkeleton /><ProductSkeleton /><ProductSkeleton /><ProductSkeleton /><ProductSkeleton />
           </div>
         ) : filtered.length === 0 ? (
-          <div className="smsm-panel p-10 text-center text-[#b8b8b8]">{dictionary.products.noResults}</div>
+          <div className="smsm-panel p-10 text-center">\n            <h2 className="smsm-heading text-2xl font-bold text-[#efe6dc]">{dictionary.products.noResults}</h2>\n            <p className="mx-auto mt-3 max-w-md text-sm text-[#b8b8b8]">{locale === "ar" ? "جرّب تغيير البحث أو الفلاتر لعرض موديلات أخرى." : "Try changing the search or filters to see more models."}</p>\n          </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {filtered.map((product) => <ProductCard key={product.id} product={product} locale={locale} />)}
+            {filtered.map((product, index) => <ProductCard key={product.id} product={product} locale={locale} index={index} />)}
           </div>
         )}
       </section>

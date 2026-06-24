@@ -3,7 +3,7 @@
 import { cookies, headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { CartItem, MessageStatus, OrderStatus, Product } from "@/lib/types";
-import { toPublicError } from "@/lib/security/errors";
+import { getSafeErrorDetails, toPublicError } from "@/lib/security/errors";
 import { checkContactRateLimit } from "@/lib/security/rate-limit";
 import {
   isMessageStatus,
@@ -133,6 +133,19 @@ export async function createCheckoutOrderAction(
   });
 
   if (error) {
+    console.error(
+      "[checkout:order-rpc]",
+      JSON.stringify(
+        {
+          stage: "create_order_with_stock",
+          itemCount: itemsResult.value.length,
+          productIds: itemsResult.value.map((item) => item.productId),
+          error: getSafeErrorDetails(error)
+        },
+        null,
+        2
+      )
+    );
     return { ok: false, message: toPublicError(error, "checkout", locale) };
   }
 

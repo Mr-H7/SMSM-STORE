@@ -12,7 +12,7 @@ type Props = {
 
 export function ProductForm({ categories, initial, locale }: Props) {
   const [saved, setSaved] = useState(false);
-  const [images, setImages] = useState(initial?.images.join(", ") ?? "/images/template.svg");
+  const [images, setImages] = useState(initial?.images.join(", ") ?? "/images/smsm-logo.png");
 
   return (
     <form
@@ -56,6 +56,20 @@ export function ProductForm({ categories, initial, locale }: Props) {
             <option value="active">active</option><option value="inactive">inactive</option><option value="out-of-stock">out of stock</option>
           </select>
         </label>
+        <label className="space-y-2">
+          <span className="smsm-label block">{locale === "ar" ? "شارة المنتج" : "Product Badge"}</span>
+          <select
+            name="badge"
+            defaultValue={["NEW", "BESTSELLER", "LIMITED", "OFFER"].includes(initial?.badge ?? "") ? initial?.badge : ""}
+            className="smsm-input"
+          >
+            <option value="">{locale === "ar" ? "بدون شارة" : "No badge"}</option>
+            <option value="NEW">{locale === "ar" ? "جديد" : "New"}</option>
+            <option value="BESTSELLER">{locale === "ar" ? "الأكثر مبيعاً" : "Bestseller"}</option>
+            <option value="LIMITED">{locale === "ar" ? "محدود" : "Limited"}</option>
+            <option value="OFFER">{locale === "ar" ? "عرض" : "Offer"}</option>
+          </select>
+        </label>
         <label className="space-y-2"><span className="smsm-label block">{locale === "ar" ? "المقاسات" : "Sizes"}</span><input name="sizes" defaultValue={initial?.sizes.join(", ") ?? "40, 41, 42, 43, 45"} className="smsm-input" /></label>
       </div>
 
@@ -89,9 +103,10 @@ export function ProductForm({ categories, initial, locale }: Props) {
         />
       </label>
 
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-3">
         <label className="smsm-panel flex items-center gap-3 p-3 text-sm"><input name="featured" type="checkbox" defaultChecked={initial?.featured ?? false} />{locale === "ar" ? "منتج مميز" : "Featured"}</label>
         <label className="smsm-panel flex items-center gap-3 p-3 text-sm"><input name="onOffer" type="checkbox" defaultChecked={initial?.onOffer ?? false} />{locale === "ar" ? "ضمن العروض" : "On Offer"}</label>
+        <label className="smsm-panel flex items-center gap-3 p-3 text-sm"><input name="bestSeller" type="checkbox" defaultChecked={initial?.bestSeller ?? false} />{locale === "ar" ? "الأكثر مبيعاً" : "Bestseller"}</label>
       </div>
 
       <button type="submit" className="smsm-btn-primary w-full">{locale === "ar" ? "حفظ المنتج" : "Save Product"}</button>

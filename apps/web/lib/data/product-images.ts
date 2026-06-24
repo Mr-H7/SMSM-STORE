@@ -69,7 +69,7 @@ const shoeFolders: ReadonlyArray<ShoeFolder> = [
   { name: "AIR MAX 2021 SE", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "ALEXANDER MCQUEEN", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "ASICS", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
-  { name: "B22", files: fullViews },
+  { name: "B22", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "BALENCIAGA TRACK", files: fullViews },
   { name: "BAPE", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "JORDAN 4", files: fullViews },
@@ -83,7 +83,7 @@ const shoeFolders: ReadonlyArray<ShoeFolder> = [
   { name: "NIKE SHOX", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "NIKE SHOX SUPREME", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "NIKE VM", files: fullViews },
-  { name: "TN 1", files: { FRONT: "FRONT.png", LEFT: "LEFTpng.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
+  { name: "TN 1", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "TN 3", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "TRAVIS SB", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } },
   { name: "ADIDAS ADISTAR", files: { FRONT: "FRONT.png", LEFT: "LEFT.png", RIGHT: "RIGHT.png", TOP: "TOP.png" } }
@@ -122,15 +122,16 @@ export function getApprovedShoeFolder(folderName: string) {
   return shoeFolders.find((folder) => folder.name === folderName);
 }
 
-export function buildShoeImagePaths(folder: ShoeFolder, fallback: string[] = ["/images/template.svg"]) {
+export function buildShoeImagePaths(folder: ShoeFolder, fallback: string[] = ["/images/smsm-logo.png"]) {
   const encodedFolder = encodeURIComponent(folder.name);
-  const fallbackImage = fallback[0] ?? "/images/template.svg";
-  const viewImages = shoeViews.map((view) => {
+  const fallbackImage = fallback[0] ?? "/images/smsm-logo.png";
+  const viewImages = shoeViews.flatMap((view) => {
     const file = folder.files[view];
-    return file ? `/images/SHOES/${encodedFolder}/${file}` : fallbackImage;
+    return file ? [`/images/SHOES/${encodedFolder}/${file}`] : [];
   });
   const storeImages = folder.storeImages?.map((file) => `/images/SHOES/${encodedFolder}/${file}`) ?? [];
-  return [...viewImages, ...storeImages];
+  const images = [...viewImages, ...storeImages];
+  return images.length ? images : [fallbackImage];
 }
 
 export function resolveProductImages(product: ImageMatchProduct, fallback: string[]) {
