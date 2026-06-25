@@ -123,8 +123,8 @@ export function getApprovedShoeFolder(folderName: string) {
 }
 
 export function buildShoeImagePaths(folder: ShoeFolder, fallback: string[] = ["/images/smsm-logo.png"]) {
-  const encodedFolder = encodeURIComponent(folder.name);
-  const fallbackImage = fallback[0] ?? "/images/smsm-logo.png";
+const encodedFolder = folder.name; 
+ const fallbackImage = fallback[0] ?? "/images/smsm-logo.png";
   const viewImages = shoeViews.flatMap((view) => {
     const file = folder.files[view];
     return file ? [`/images/SHOES/${encodedFolder}/${file}`] : [];
