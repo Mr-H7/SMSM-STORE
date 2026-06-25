@@ -8,6 +8,29 @@ type ProductsResponse = { ok: true; products: Product[] };
 type ProductResponse = { ok: true; product: Product };
 type CategoriesResponse = { ok: true; categories: Category[] };
 
+function normalizePublicImagePath(path: string) {
+  if (!path.startsWith("/images/")) return path;
+  try {
+    return decodeURIComponent(path);
+  } catch {
+    return path;
+  }
+}
+
+function normalizeProductImages(product: Product): Product {
+  return {
+    ...product,
+    images: product.images.map((image) => normalizePublicImagePath(image)),
+  };
+}
+
+function normalizeCategoryImage(category: Category): Category {
+  return {
+    ...category,
+    image: normalizePublicImagePath(category.image),
+  };
+}
+
 function apiBase() {
   const value = process.env.SYSTEM_API_URL?.trim().replace(/\/$/, "");
   if (!value) {
@@ -44,19 +67,18 @@ async function getJson<T>(path: string, tags: string[]): Promise<T> {
 }
 
 export async function getPublicProducts() {
-  return (await getJson<ProductsResponse>("/api/storefront/v1/products", ["storefront-products"])).products;
+  return (await getJson<ProductsResponse>("/api/storefront/v1/products", ["storefront-products"])).products.map(normalizeProductImages);
 }
 
 export const getProducts = getPublicProducts;
 
 export async function getProductBySlug(slug: string) {
   try {
-    return (
-      await getJson<ProductResponse>(
-        "/api/storefront/v1/products/" + encodeURIComponent(slug),
-        ["storefront-products", "storefront-product-" + slug]
-      )
-    ).product;
+    const response = await getJson<ProductResponse>(
+      "/api/storefront/v1/products/" + encodeURIComponent(slug),
+      ["storefront-products", "storefront-product-" + slug]
+    );
+    return normalizeProductImages(response.product);
   } catch (error) {
     if (error instanceof Error && error.message === "Product not found.") return null;
     throw error;
@@ -64,5 +86,5 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function getCategories() {
-  return (await getJson<CategoriesResponse>("/api/storefront/v1/categories", ["storefront-categories"])).categories;
+  return (await getJson<CategoriesResponse>("/api/storefront/v1/categories", ["storefront-categories"])).categories.map(normalizeCategoryImage);
 }
