@@ -8,13 +8,45 @@ type ProductsResponse = { ok: true; products: Product[] };
 type ProductResponse = { ok: true; product: Product };
 type CategoriesResponse = { ok: true; categories: Category[] };
 
-function normalizePublicImagePath(path: string) {
+const localShoeImagePrefix = "/images/SHOES/";
+const supabaseProductImageBucket = "product-images";
+
+function decodePublicImagePath(path: string) {
   if (!path.startsWith("/images/")) return path;
   try {
     return decodeURIComponent(path);
   } catch {
     return path;
   }
+}
+
+function productImageCdnBaseUrl() {
+  const configured = process.env.NEXT_PUBLIC_SHOE_IMAGE_CDN_BASE_URL?.trim().replace(/\/$/, "");
+  if (configured) return configured;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/$/, "");
+  if (!supabaseUrl) return null;
+
+  return `${supabaseUrl}/storage/v1/object/public/${supabaseProductImageBucket}`;
+}
+
+function encodeStoragePath(path: string) {
+  return path
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
+function normalizePublicImagePath(path: string) {
+  const decodedPath = decodePublicImagePath(path);
+  if (!decodedPath.startsWith(localShoeImagePrefix)) return decodedPath;
+
+  const baseUrl = productImageCdnBaseUrl();
+  if (!baseUrl) return decodedPath;
+
+  const storagePath = decodedPath.replace(/^\/images\//, "");
+  return `${baseUrl}/${encodeStoragePath(storagePath)}`;
 }
 
 function normalizeProductImages(product: Product): Product {
