@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import type { Locale, Product } from "@/lib/types";
+import { absoluteSiteUrl, getSiteUrl } from "@/lib/site-url";
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://smsm-store.example.com").replace(/\/$/, "");
+export const siteUrl = getSiteUrl();
 
 const pageMeta = {
   home: {
@@ -100,8 +101,8 @@ export function storeJsonLd(locale: Locale) {
     "@type": "Store",
     name: "SMSM STORE",
     url: siteUrl + "/" + locale,
-    image: siteUrl + "/images/store/store-front.jpeg",
-    logo: siteUrl + "/images/smsm-logo.png",
+    image: absoluteSiteUrl("/images/store/store-front.jpeg"),
+    logo: absoluteSiteUrl("/images/smsm-logo.png"),
     telephone: "+201559978355",
     address: {
       "@type": "PostalAddress",
@@ -129,7 +130,7 @@ export function productJsonLd(locale: Locale, product: Product) {
     "@type": "Product",
     name,
     description,
-    image: (product.images?.length ? product.images : ["/images/smsm-logo.png"]).map((image) => siteUrl + image),
+    image: (product.images?.length ? product.images : ["/images/smsm-logo.png"]).map((image) => absoluteSiteUrl(image)),
     sku: product.sku || product.slug,
     offers: {
       "@type": "Offer",

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
+import { getSiteUrl } from "@/lib/site-url";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://smsm-store.example.com";
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

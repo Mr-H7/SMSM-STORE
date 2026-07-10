@@ -1,7 +1,8 @@
-﻿import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site-url";
 import { getPublicProducts } from "@/lib/system-api/queries";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://smsm-store.example.com").replace(new RegExp("/$"), "");
+const siteUrl = getSiteUrl();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = ["", "/products", "/offers", "/about", "/contact"].flatMap((route) => [
@@ -32,4 +33,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return staticRoutes;
   }
 }
-

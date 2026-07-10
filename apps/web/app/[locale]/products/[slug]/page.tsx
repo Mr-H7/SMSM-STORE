@@ -7,8 +7,9 @@ import { ProductDetailsClient } from "@/components/storefront/ProductDetailsClie
 import { getProductBySlug, getPublicProducts } from "@/lib/system-api/queries";
 import { isLocale } from "@/lib/locale";
 import { productJsonLd } from "@/lib/seo";
+import { getSiteUrl } from "@/lib/site-url";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://smsm-store.example.com").replace(new RegExp("/$"), "");
+const siteUrl = getSiteUrl();
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const resolved = await params;

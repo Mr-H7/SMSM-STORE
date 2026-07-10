@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site-url";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://smsm-store.example.com";
+  const siteUrl = getSiteUrl();
 
   return {
     rules: {
@@ -9,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: ["/ar", "/en", "/images/"],
       disallow: ["/admin", "/api/"]
     },
-    sitemap: siteUrl.replace(new RegExp("/$"), "") + "/sitemap.xml"
+    sitemap: siteUrl + "/sitemap.xml"
   };
 }
